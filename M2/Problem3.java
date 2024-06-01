@@ -24,7 +24,10 @@ public class Problem3 {
         //TODO convert each value to positive
         //set the result to the proper index of the output array and maintain the original data type
         //hint: don't forget to handle the data types properly, the result datatype should be the same as the original datatype
-        
+      
+        System.out.println("Making each value positive");
+
+        System.out.println("Assigning each value to the output array in the same index as the original data type");
         //end edit section
 
         StringBuilder sb = new StringBuilder();
