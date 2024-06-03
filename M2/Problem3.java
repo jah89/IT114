@@ -41,7 +41,7 @@ public class Problem3 {
             }
         }
         System.out.println("Making each value positive");
-
+    
         System.out.println("Assigning each value to the output array in the same index as original data type");
         // end edit section
 
