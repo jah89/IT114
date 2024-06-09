@@ -147,7 +147,7 @@ public class NumberGuesser4 {
                 } else if (remainder >= 3) {
                         System.out.println("Hint: Hot");
                 } else {
-                    System.out.println("Hint: Very Hot"); 
+                    System.out.println("Hint: Very Hot");
                 }
                     //jah89 06-09-2024
                 if (guess < number) {
