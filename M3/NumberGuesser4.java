@@ -106,7 +106,7 @@ public class NumberGuesser4 {
         if (message.equalsIgnoreCase("quit")) {
             System.out.println("Tired of playing? No problem, see you next time.");
             processed = true;
-        }
+        }  
         // TODO add other conditions here
         return processed;
     }
@@ -135,11 +135,18 @@ public class NumberGuesser4 {
             if (strikes >= maxStrikes) {
                 lose();
                 pickNewRandom = true;
+                // jah89 06-09-2024
+            } else {
+                if (guess < number) {
+                    System.out.println("Hint: The number is higher.");
+                } else {
+                    System.out.println("Hint: The number is lower.");
+                }
             }
         }
         saveState();
     }
-
+    
     private int strToNum(String message) {
         int guess = -1;
         try {
@@ -171,9 +178,9 @@ public class NumberGuesser4 {
                 if (processCommands(message)) {
                     // command handled; don't proceed with game logic
                     break;
-                }
+                } 
                 // this is just to demonstrate we can return a value and pass it into another
-                // method
+                // method 
                 int guess = strToNum(message);
                 processGuess(guess);
                 // the following line is the same as the above two lines
