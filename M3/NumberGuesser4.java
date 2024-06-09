@@ -135,17 +135,32 @@ public class NumberGuesser4 {
             if (strikes >= maxStrikes) {
                 lose();
                 pickNewRandom = true;
-                // jah89 06-09-2024
+                //jah89 06-09-2024
             } else {
-                if (guess < number) {
-                    System.out.println("Hint: The number is higher.");
+                int remainder = Math.abs(guess - number);
+                if (remainder >= 10) {
+                    System.out.println("Hint: Very Cold");
+                } else if (remainder >= 7) {
+                    System.out.println("Hint: Cold ");
+                } else if (remainder >= 5) {
+                    System.out.println("Hint: Warm");
+                } else if (remainder >= 3) {
+                        System.out.println("Hint: Hot");
                 } else {
-                    System.out.println("Hint: The number is lower.");
+                    System.out.println("Hint: Very Hot");
+                }
+                    //jah89 06-09-2024
+                if (guess < number) {
+                    System.out.println("The number is higher.");
+                } else {
+                    System.out.println("The number is lower.");
                 }
             }
         }
         saveState();
     }
+    
+    
     
     private int strToNum(String message) {
         int guess = -1;
