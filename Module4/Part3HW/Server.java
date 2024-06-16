@@ -3,6 +3,7 @@ package Module4.Part3HW;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Server {
@@ -34,6 +35,13 @@ public class Server {
         } finally {
             System.out.println("Closing server socket");
         }
+    }
+    //jah89 06/16/2024
+    protected void processCoinToss(ServerThread sender) {
+        Random random = new Random();
+        String result = random.nextBoolean() ? "heads" : "tails";
+        String message = String.format("User[%s] flipped a coin let's see what they got! %s", sender.getClientId(), result);
+        relay(message, null);
     }
     /**
      * Callback passed to ServerThread to inform Server they're ready to receive data
@@ -118,6 +126,10 @@ public class Server {
             if (removedClient != null) {
                 disconnect(removedClient);
             }
+            return true;
+            //jah89 06/16/2024 
+        } else if ("/flip".equalsIgnoreCase(message) || "/toss".equalsIgnoreCase(message) || "/coin".equalsIgnoreCase(message)) {
+            this.processCoinToss(sender);
             return true;
         }
         // add more "else if" as needed
