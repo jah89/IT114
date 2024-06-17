@@ -35,7 +35,23 @@ public class Server {
         } finally {
             System.out.println("Closing server socket");
         }
+
+        //jah89 06/17/2024
+    } private String shuffleMessage(String message) {
+        char[] characters = message.toCharArray();
+        Random random = new Random();
+        for (int i = 0; i < characters.length; i++) {
+            int randomIndex = random.nextInt(characters.length);
+            char temp = characters[i];
+            characters[i] = characters[randomIndex];
+            characters[randomIndex] = temp;
+        }
+        String shuffled = new String(characters);
+        System.out.println("Shuffling result: " + shuffled); 
+        return shuffled;
     }
+
+    
     //jah89 06/16/2024
     protected void processCoinToss(ServerThread sender) {
         Random random = new Random();
@@ -127,13 +143,28 @@ public class Server {
                 disconnect(removedClient);
             }
             return true;
-            //jah89 06/16/2024 
+            //jah89 06/16/2024
         } else if ("/flip".equalsIgnoreCase(message) || "/toss".equalsIgnoreCase(message) || "/coin".equalsIgnoreCase(message)) {
             this.processCoinToss(sender);
             return true;
+
+            //jah90 06/17/2024
+        } else if (message.startsWith("/shuffle")) {
+            String[] parts = message.split(" ", 2);
+            if (parts.length == 2) {
+                String originalMessage = parts[1];
+                String shuffledMessage = shuffleMessage(originalMessage);
+                String resultMessage = String.format("User[%s]: %s", sender.getClientId(), shuffledMessage);
+                relay(resultMessage, null);
+            } else {
+                sender.send("Invalid try using /shuffle <message>.");
+            }
+            return true;
         }
-        // add more "else if" as needed
         return false;
+    
+        
+        // add more "else if" as needed
     }
 
     public static void main(String[] args) {
