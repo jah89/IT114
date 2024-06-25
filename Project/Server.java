@@ -14,13 +14,14 @@ public enum Server {
     private boolean isRunning = true;
     private long nextClientId = 1;
 
+    //jah89 06/24/2024
     private Server(){
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             System.out.println("JVM is shutting down. Perform cleanup tasks.");
             shutdown();
         }));
     }
-
+    //jah89 06/23/2024
     private void start(int port) {
         this.port = port;
         // server listening
@@ -50,6 +51,7 @@ public enum Server {
     /**
      * Gracefully disconnect clients
      */
+    //jah89 06/24/2024
     private void shutdown() {
         try {
             //chose removeIf over forEach to avoid potential ConcurrentModificationException
@@ -86,6 +88,7 @@ public enum Server {
      * @param name Unique name of the room
      * @return true if it was created and false if it wasn't
      */
+    //jah89 06/24/2024
     protected boolean createRoom(String name) {
         final String nameCheck = name.toLowerCase();
         if (rooms.containsKey(nameCheck)) {

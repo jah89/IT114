@@ -1,5 +1,6 @@
 package Project;
 
+import Project.TextFX.Color;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -10,8 +11,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import Project.TextFX.Color;
 
 /**
  * Demoing bi-directional communication between client and server in a
@@ -31,6 +30,7 @@ public enum Client {
     private ClientData myData;
 
     // constants (used to reduce potential types when using them in code)
+    //jah89 06/24/2024
     private final String COMMAND_CHARACTER = "/";
     private final String CREATE_ROOM = "createroom";
     private final String JOIN_ROOM = "joinroom";
@@ -63,6 +63,7 @@ public enum Client {
      * @param port
      * @return true if connection was successful
      */
+    //jah89 06/24/2024
     private boolean connect(String address, int port) {
         try {
             server = new Socket(address, port);
@@ -112,6 +113,7 @@ public enum Client {
      * @param text
      * @return true if the text was a command or triggered a command
      */
+    // jah89 06/24/2024
     private boolean processClientCommand(String text) {
         if (isConnection(text)) {
             if (myData.getClientName() == null || myData.getClientName().length() == 0) {
@@ -178,6 +180,7 @@ public enum Client {
      * 
      * @param room
      */
+    //jah89 06/24/2024
     private void sendCreateRoom(String room) {
         Payload p = new Payload();
         p.setPayloadType(PayloadType.ROOM_CREATE);
@@ -190,6 +193,7 @@ public enum Client {
      * 
      * @param room
      */
+    //jah89 06/24/2024
     private void sendJoinRoom(String room) {
         Payload p = new Payload();
         p.setPayloadType(PayloadType.ROOM_JOIN);
@@ -211,6 +215,7 @@ public enum Client {
      * 
      * @param message
      */
+    //jah89 06/24/2024
     private void sendMessage(String message) {
         Payload p = new Payload();
         p.setPayloadType(PayloadType.MESSAGE);
@@ -246,7 +251,7 @@ public enum Client {
 
     }
     // end send methods
-
+    //jah89 06/23/2024
     public void start() throws IOException {
         System.out.println("Client starting");
 
@@ -260,6 +265,7 @@ public enum Client {
     /**
      * Listens for messages from the server
      */
+    //jah89 06/24/2024
     private void listenToServer() {
         try {
             while (isRunning && isConnected()) {
@@ -289,6 +295,7 @@ public enum Client {
     /**
      * Listens for keyboard input from the user
      */
+    //jah89 06/24/2024
     private void listenToInput() {
         try (Scanner si = new Scanner(System.in)) {
             System.out.println("Waiting for input"); // moved here to avoid console spam

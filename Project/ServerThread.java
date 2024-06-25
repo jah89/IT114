@@ -82,8 +82,9 @@ public class ServerThread extends BaseServerThread {
         super.disconnect();
     }
     // handle received message from the Client
+    //jah89 06/24/2024 
     @Override
-    protected void processPayload(Payload payload) {
+    protected void Payload(Payload payload) {
         try {
             switch (payload.getPayloadType()) {
                 case CLIENT_CONNECT:
@@ -139,6 +140,7 @@ public class ServerThread extends BaseServerThread {
      * @param message
      * @return @see {@link #send(Payload)}
      */
+    //jah89 06/24/2024
     public boolean sendMessage(long senderId, String message) {
         Payload p = new Payload();
         p.setClientId(senderId);
