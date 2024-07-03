@@ -1,5 +1,8 @@
-package Project;
+package Project.server;
 
+import Project.common.ConnectionPayload;
+import Project.common.Payload;
+import Project.common.PayloadType;
 import java.net.Socket;
 import java.util.Objects;
 import java.util.function.Consumer;

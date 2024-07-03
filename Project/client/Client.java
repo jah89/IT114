@@ -1,6 +1,10 @@
-package Project;
+package Project.client;
 
-import Project.TextFX.Color;
+import Project.common.ConnectionPayload;
+import Project.common.Payload;
+import Project.common.PayloadType;
+import Project.common.TextFX;
+import Project.common.TextFX.Color;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;

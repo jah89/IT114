@@ -3,11 +3,10 @@
 input=$(echo "$2" | tr '[:upper:]' '[:lower:]')
 if [ "$input" = "server" ];
 then
-	java $1.Server.Server
+    java $1.server.ServerApp
 elif [ "$input" = "client" ];
 then
-	java $1.Client.Client
-    # In Milestone3 changes Client to ClientUI
+    java $1.client.Client
 else
-	echo "Must specify client or server"
+    echo "Must specify client or server"
 fi
