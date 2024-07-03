@@ -3,6 +3,7 @@ package Project.client;
 import Project.common.ConnectionPayload;
 import Project.common.Payload;
 import Project.common.PayloadType;
+import Project.common.RollPayload;
 import Project.common.TextFX;
 import Project.common.TextFX.Color;
 import java.io.IOException;
@@ -10,11 +11,14 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+
 
 /**
  * Demoing bi-directional communication between client and server in a
@@ -22,7 +26,7 @@ import java.util.regex.Pattern;
  */
 public enum Client {
     INSTANCE;
-
+    private Random random = new Random(); // Adding a random num generator jah89 07/03/2024
     private Socket server = null;
     private ObjectOutputStream out = null;
     private ObjectInputStream in = null;
@@ -142,6 +146,12 @@ public enum Client {
             System.out.println(
                     String.join("\n", knownClients.values().stream()
                             .map(c -> String.format("%s(%s)", c.getClientName(), c.getClientId())).toList()));
+            return true;
+        } else if (text.startsWith("/roll")) { // Handle roll jah90 07/03/2024
+            handleRollCommand(text);
+            return true;
+        } else if (text.equalsIgnoreCase("/flip")) { // Handle flip jah89
+            handleFlipCommand();
             return true;
         } else { // logic previously from Room.java
             // decided to make this as separate block to separate the core client-side items
@@ -468,6 +478,44 @@ public enum Client {
             }
         }
     }
+    private void handleRollCommand(String text) {   //jah89 07/03/2024
+    RollPayload rollPayload = new RollPayload();
+    String[] parts = text.split(" ");
+    if (parts.length == 2) {
+        String rollCommand = parts[1];
+        if (rollCommand.matches("\\d+")) {
+            int max = Integer.parseInt(rollCommand);
+            int result = random.nextInt(max + 1);
+            rollPayload.setSides(max);
+            rollPayload.setRolls(1);
+            rollPayload.setMessage(String.format("%s rolled %d and got %d", myData.getClientName(), max, result));
+            System.out.println(rollPayload.getMessage());
+        } else if (rollCommand.matches("\\d+d\\d+")) {
+            String[] diceParts = rollCommand.split("d");
+            int rolls = Integer.parseInt(diceParts[0]);
+            int sides = Integer.parseInt(diceParts[1]);
+            int result = 0;
+            for (int i = 0; i < rolls; i++) {
+                result += random.nextInt(sides) + 1;
+            }
+            rollPayload.setSides(sides);
+            rollPayload.setRolls(rolls);
+            rollPayload.setMessage(String.format("%s rolled %sd%d and got %d", myData.getClientName(), rolls, sides, result));
+            System.out.println(rollPayload.getMessage());
+        }
+        send(rollPayload);
+    }
+}
+
+private void handleFlipCommand() {
+    Payload flipPayload = new Payload();
+    flipPayload.setPayloadType(PayloadType.FLIP);
+    String result = random.nextBoolean() ? "heads" : "tails";
+    flipPayload.setMessage(String.format("%s flipped a coin and got %s", myData.getClientName(), result));
+    System.out.println(flipPayload.getMessage());
+    send(flipPayload);
+}
+
     // end payload processors
 
 }
