@@ -2,6 +2,10 @@ package Project.server;
 
 import java.util.concurrent.ConcurrentHashMap;
 
+import Project.common.LoggerUtil;
+import Project.common.Payload;
+import Project.common.RollPayload;
+
 public class Room implements AutoCloseable{
     private String name;// unique name of the Room
     private volatile boolean isRunning = false;
@@ -10,13 +14,13 @@ public class Room implements AutoCloseable{
     public final static String LOBBY = "lobby";
 
     private void info(String message) {
-        System.out.println(String.format("Room[%s]: %s", name, message));
+        LoggerUtil.INSTANCE.info(String.format("Room[%s]: %s", name, message));
     }
 
     public Room(String name) {
         this.name = name;
         isRunning = true;
-        System.out.println(String.format("Room[%s] created", this.name));
+        info("created");
     }
 
     public String getName() {
@@ -66,7 +70,6 @@ public class Room implements AutoCloseable{
      * 
      * @param client
      */
-    //jah89 06/24/2024
     protected synchronized void disconnect(ServerThread client) {
         if (!isRunning) { // block action if Room isn't running
             return;
@@ -182,7 +185,6 @@ public class Room implements AutoCloseable{
      * @param sender  ServerThread (client) sending the message or null if it's a
      *                server-generated message
      */
-    //jah89 06/24/2024
     protected synchronized void sendMessage(ServerThread sender, String message) {
         if (!isRunning) { // block action if Room isn't running
             return;
@@ -208,7 +210,6 @@ public class Room implements AutoCloseable{
     // end send data to client(s)
 
     // receive data from ServerThread
-    //jah89 06/24/2024
     protected void handleCreateRoom(ServerThread sender, String room) {
         if (Server.INSTANCE.createRoom(room)) {
             Server.INSTANCE.joinRoom(room, sender);
@@ -223,9 +224,24 @@ public class Room implements AutoCloseable{
         }
     }
 
+    protected void handleListRooms(ServerThread sender, String roomQuery){
+        sender.sendRooms(Server.INSTANCE.listRooms(roomQuery));
+    }
+
     protected void clientDisconnect(ServerThread sender) {
         disconnect(sender);
     }
 
+    //jah89 07-04-2024
+protected synchronized void processRollCommand(ServerThread sender, RollPayload rollPayload) { 
+        String message = rollPayload.getMessage();
+        sendMessage(sender, message);
+    }
+
+    protected synchronized void processFlipCommand(ServerThread sender, Payload flipPayload) {
+        // Extract flip result from flipPayload and broadcast to all clients
+        String message = flipPayload.getMessage();
+        sendMessage(sender, message);
+    }
     // end receive data from ServerThread
 }
