@@ -144,3 +144,45 @@
 > Closed socket
 07/04/2024 13:39:25 [Project.client.Client] ([32mINFO[0m):
 > listenToServer thread stopped
+07/07/2024 10:25:58 [Project.client.Client] ([32mINFO[0m):
+> Client Created
+07/07/2024 10:25:58 [Project.client.Client] ([32mINFO[0m):
+> Client starting
+07/07/2024 10:26:11 [Project.client.Client] ([32mINFO[0m):
+> Client connected
+07/07/2024 10:26:11 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[CLIENT_ID] Client Id [1] Message: [null] Client Name [jason] Status [connect]
+07/07/2024 10:26:11 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[ROOM_JOIN] Client Id [1] Message: [lobby] Client Name [jason] Status [connect]
+07/07/2024 10:26:33 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [1] Message: [<b>hey</b>]
+07/07/2024 10:26:40 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [1] Message: [<i>hey</i>]
+07/07/2024 10:28:00 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [1] Message: [test <u>underlined</u>]
+07/07/2024 10:28:19 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [1] Message: [Color <red> red </red>]
+07/07/2024 10:28:46 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [1] Message: [<b>hey</b> i <i>like</i> the color <blue> blue </blue>]
+07/07/2024 10:29:16 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [1] Message: [i like <green> green! </green>]
+07/07/2024 10:36:15 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[DISCONNECT] Client Id [1] Message: [null] Client Name [jason] Status [disconnect]
+07/07/2024 10:36:15 [Project.client.Client] ([32mINFO[0m):
+> Closing output stream
+07/07/2024 10:36:15 [Project.client.Client] ([32mINFO[0m):
+> Closing input stream
+07/07/2024 10:36:15 [Project.client.Client] ([32mINFO[0m):
+> Closing connection
+07/07/2024 10:36:15 [Project.client.Client] ([32mINFO[0m):
+> Closed socket
+07/07/2024 10:36:15 [Project.client.Client] ([32mINFO[0m):
+> Closing output stream
+07/07/2024 10:36:15 [Project.client.Client] ([32mINFO[0m):
+> Closing input stream
+07/07/2024 10:36:15 [Project.client.Client] ([32mINFO[0m):
+> Closing connection
+07/07/2024 10:36:15 [Project.client.Client] ([32mINFO[0m):
+> Closed socket
+07/07/2024 10:36:15 [Project.client.Client] ([32mINFO[0m):
+> listenToServer thread stopped
