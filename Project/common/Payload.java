@@ -2,7 +2,7 @@ package Project.common;
 
 import java.io.Serializable;
 
-public class Payload implements Serializable {
+public class Payload implements Serializable {   //jah89 07-07-2024
     private PayloadType payloadType;
     private long clientId;
     private String message;

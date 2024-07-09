@@ -263,3 +263,41 @@
 > ServerThread[jason(1)]: Received from my client: Payload[MESSAGE] Client Id [0] Message: [i like #g green! g#]
 07/07/2024 10:29:16 [Project.server.Room] ([32mINFO[0m):
 > Room[lobby]: sending message to lobby recipients: 1
+07/07/2024 12:08:48 [Project.server.Server] ([32mINFO[0m):
+> Server Starting
+07/07/2024 12:08:48 [Project.server.Server] ([32mINFO[0m):
+> Listening on port 3000
+07/07/2024 12:08:48 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: created
+07/07/2024 12:08:48 [Project.server.Server] ([32mINFO[0m):
+> Created new Room lobby
+07/07/2024 12:08:48 [Project.server.Server] ([32mINFO[0m):
+> Waiting for next client
+07/07/2024 12:09:05 [Project.server.Server] ([32mINFO[0m):
+> Client connected
+07/07/2024 12:09:05 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[null(0)]: ServerThread created
+07/07/2024 12:09:05 [Project.server.Server] ([32mINFO[0m):
+> Waiting for next client
+07/07/2024 12:09:05 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[null(-1)]: Thread starting
+07/07/2024 12:09:05 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[null(-1)]: Received from my client: Payload[CLIENT_CONNECT] Client Id [0] Message: [null] Client Name [jason] Status [disconnect]
+07/07/2024 12:09:05 [Project.server.Server] ([32mINFO[0m):
+> Server: *jason[1] initialized*
+07/07/2024 12:09:05 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: sending room status to lobby recipients
+07/07/2024 12:09:05 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: jason[1] joined the Room[lobby]
+07/07/2024 12:09:11 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[jason(1)]: Received from my client: RollPayload[sides=6, rolls=1]
+07/07/2024 12:09:11 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: sending message to lobby recipients: 1
+07/07/2024 12:09:13 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[jason(1)]: Received from my client: RollPayload[sides=8, rolls=1]
+07/07/2024 12:09:13 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: sending message to lobby recipients: 1
+07/07/2024 12:09:16 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[jason(1)]: Received from my client: RollPayload[sides=10, rolls=1]
+07/07/2024 12:09:16 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: sending message to lobby recipients: 1

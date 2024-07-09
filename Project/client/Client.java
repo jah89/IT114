@@ -519,7 +519,7 @@ public enum Client {
             rollPayload.setRolls(1);
             rollPayload.setMessage(String.format("%s rolled %d and got %d", myData.getClientName(), max, result));
             System.out.println(rollPayload.getMessage());
-        } else if (rollCommand.matches("\\d+d\\d+")) {
+        } else if (rollCommand.matches("\\d+d\\d+")) {  //jah89 07-07-2024
             String[] diceParts = rollCommand.split("d");
             int rolls = Integer.parseInt(diceParts[0]);
             int sides = Integer.parseInt(diceParts[1]);
@@ -531,13 +531,12 @@ public enum Client {
             rollPayload.setRolls(rolls);
             rollPayload.setMessage(String.format("%s rolled %sd%d and got %d", myData.getClientName(), rolls, sides, result));
             System.out.println(rollPayload.getMessage());
-        }
         rollPayload.setPayloadType(PayloadType.ROLL);
         send(rollPayload);
     }
 }
 //jah89 07-04-2024
-private void handleFlipCommand() {
+ private void handleFlipCommand() { 
     Payload flipPayload = new Payload();
     flipPayload.setPayloadType(PayloadType.FLIP);
     String result = random.nextBoolean() ? "heads" : "tails";

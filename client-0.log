@@ -186,3 +186,31 @@
 > Closed socket
 07/07/2024 10:36:15 [Project.client.Client] ([32mINFO[0m):
 > listenToServer thread stopped
+07/07/2024 12:08:55 [Project.client.Client] ([31mSEVERE[0m):
+> Error in listentToInput()
+	at java.base/java.util.Scanner.nextLine(Scanner.java:1677)
+	at Project.client.Client.listenToInput(Client.java:334)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1804)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1796)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:507)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1491)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:2073)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:2035)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:187)
+
+07/07/2024 12:08:58 [Project.client.Client] ([32mINFO[0m):
+> Client Created
+07/07/2024 12:08:58 [Project.client.Client] ([32mINFO[0m):
+> Client starting
+07/07/2024 12:09:05 [Project.client.Client] ([32mINFO[0m):
+> Client connected
+07/07/2024 12:09:05 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[CLIENT_ID] Client Id [1] Message: [null] Client Name [jason] Status [connect]
+07/07/2024 12:09:05 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[ROOM_JOIN] Client Id [1] Message: [lobby] Client Name [jason] Status [connect]
+07/07/2024 12:09:11 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [1] Message: [jason rolled 6 and got 3]
+07/07/2024 12:09:13 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [1] Message: [jason rolled 8 and got 0]
+07/07/2024 12:09:16 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [1] Message: [jason rolled 10 and got 1]
