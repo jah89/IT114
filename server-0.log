@@ -1,0 +1,303 @@
+07/04/2024 10:49:51 [Project.server.Server] ([32mINFO[0m):
+> Server Starting
+07/04/2024 10:49:51 [Project.server.Server] ([32mINFO[0m):
+> Listening on port 3000
+07/04/2024 10:49:51 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: created
+07/04/2024 10:49:51 [Project.server.Server] ([32mINFO[0m):
+> Created new Room lobby
+07/04/2024 10:49:51 [Project.server.Server] ([32mINFO[0m):
+> Waiting for next client
+07/04/2024 10:51:12 [Project.server.Server] ([32mINFO[0m):
+> Client connected
+07/04/2024 10:51:12 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[null(0)]: ServerThread created
+07/04/2024 10:51:12 [Project.server.Server] ([32mINFO[0m):
+> Waiting for next client
+07/04/2024 10:51:12 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[null(-1)]: Thread starting
+07/04/2024 10:51:13 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[null(-1)]: Received from my client: Payload[CLIENT_CONNECT] Client Id [0] Message: [null] Client Name [jason] Status [disconnect]
+07/04/2024 10:51:13 [Project.server.Server] ([32mINFO[0m):
+> Server: *jason[1] initialized*
+07/04/2024 10:51:13 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: sending room status to lobby recipients
+07/04/2024 10:51:13 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: jason[1] joined the Room[lobby]
+07/04/2024 10:51:29 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[jason(1)]: Received from my client: Payload[FLIP] Client Id [0] Message: [jason flipped a coin and got heads]
+07/04/2024 10:51:29 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: sending message to lobby recipients: 1
+07/04/2024 10:52:47 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[jason(1)]: Received from my client: Payload[MESSAGE] Client Id [0] Message: [/ROLL]
+07/04/2024 10:52:47 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: sending message to lobby recipients: 1
+07/04/2024 10:52:57 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[jason(1)]: Received from my client: Payload[FLIP] Client Id [0] Message: [jason flipped a coin and got heads]
+07/04/2024 10:52:57 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: sending message to lobby recipients: 1
+07/04/2024 10:54:28 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[jason(1)]: Received from my client: Payload[MESSAGE] Client Id [0] Message: [/leave]
+07/04/2024 10:54:28 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: sending message to lobby recipients: 1
+07/04/2024 10:54:37 [Project.server.Server] ([32mINFO[0m):
+> JVM is shutting down. Perform cleanup tasks.
+07/04/2024 11:09:13 [Project.server.Server] ([32mINFO[0m):
+> Server Starting
+07/04/2024 11:09:13 [Project.server.Server] ([32mINFO[0m):
+> Listening on port 3000
+07/04/2024 11:09:13 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: created
+07/04/2024 11:09:13 [Project.server.Server] ([32mINFO[0m):
+> Created new Room lobby
+07/04/2024 11:09:13 [Project.server.Server] ([32mINFO[0m):
+> Waiting for next client
+07/04/2024 11:09:59 [Project.server.Server] ([32mINFO[0m):
+> Client connected
+07/04/2024 11:09:59 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[null(0)]: ServerThread created
+07/04/2024 11:09:59 [Project.server.Server] ([32mINFO[0m):
+> Waiting for next client
+07/04/2024 11:09:59 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[null(-1)]: Thread starting
+07/04/2024 11:10:00 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[null(-1)]: Received from my client: Payload[CLIENT_CONNECT] Client Id [0] Message: [null] Client Name [Jason] Status [disconnect]
+07/04/2024 11:10:00 [Project.server.Server] ([32mINFO[0m):
+> Server: *Jason[1] initialized*
+07/04/2024 11:10:00 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: sending room status to lobby recipients
+07/04/2024 11:10:00 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: Jason[1] joined the Room[lobby]
+07/04/2024 11:15:03 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[Jason(1)]: Received from my client: Payload[FLIP] Client Id [0] Message: [Jason flipped a coin and got heads]
+07/04/2024 11:15:03 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: sending message to lobby recipients: 1
+07/04/2024 11:15:48 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[Jason(1)]: Received from my client: RollPayload[sides=1, rolls=1]
+07/04/2024 11:15:48 [Project.server.ServerThread] ([31mSEVERE[0m):
+> Could not process Payload: RollPayload[sides=1, rolls=1]
+	at Project.server.ServerThread.processPayload(ServerThread.java:97)
+	at Project.server.BaseServerThread.run(BaseServerThread.java:89)
+
+07/04/2024 11:15:50 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[Jason(1)]: Received from my client: RollPayload[sides=6, rolls=1]
+07/04/2024 11:15:50 [Project.server.ServerThread] ([31mSEVERE[0m):
+> Could not process Payload: RollPayload[sides=6, rolls=1]
+	at Project.server.ServerThread.processPayload(ServerThread.java:97)
+	at Project.server.BaseServerThread.run(BaseServerThread.java:89)
+
+07/04/2024 11:15:54 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[Jason(1)]: Received from my client: RollPayload[sides=34, rolls=1]
+07/04/2024 11:15:54 [Project.server.ServerThread] ([31mSEVERE[0m):
+> Could not process Payload: RollPayload[sides=34, rolls=1]
+	at Project.server.ServerThread.processPayload(ServerThread.java:97)
+	at Project.server.BaseServerThread.run(BaseServerThread.java:89)
+
+07/04/2024 11:15:59 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[Jason(1)]: Received from my client: RollPayload[sides=6, rolls=1]
+07/04/2024 11:15:59 [Project.server.ServerThread] ([31mSEVERE[0m):
+> Could not process Payload: RollPayload[sides=6, rolls=1]
+	at Project.server.ServerThread.processPayload(ServerThread.java:97)
+	at Project.server.BaseServerThread.run(BaseServerThread.java:89)
+
+07/04/2024 11:18:57 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[Jason(1)]: Received from my client: RollPayload[sides=6, rolls=2]
+07/04/2024 11:18:57 [Project.server.ServerThread] ([31mSEVERE[0m):
+> Could not process Payload: RollPayload[sides=6, rolls=2]
+	at Project.server.ServerThread.processPayload(ServerThread.java:97)
+	at Project.server.BaseServerThread.run(BaseServerThread.java:89)
+
+07/04/2024 11:19:06 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[Jason(1)]: IO exception while reading from client
+07/04/2024 11:19:06 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[Jason(1)]: Exited thread loop. Cleaning up connection
+07/04/2024 11:19:06 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[Jason(1)]: ServerThread cleanup() start
+07/04/2024 11:19:06 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[Jason(1)]: ServerThread cleanup() end
+07/04/2024 11:19:07 [Project.server.Server] ([32mINFO[0m):
+> JVM is shutting down. Perform cleanup tasks.
+07/04/2024 11:19:46 [Project.server.Server] ([32mINFO[0m):
+> Server Starting
+07/04/2024 11:19:46 [Project.server.Server] ([32mINFO[0m):
+> Listening on port 3000
+07/04/2024 11:19:46 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: created
+07/04/2024 11:19:46 [Project.server.Server] ([32mINFO[0m):
+> Created new Room lobby
+07/04/2024 11:19:46 [Project.server.Server] ([32mINFO[0m):
+> Waiting for next client
+07/04/2024 11:19:56 [Project.server.Server] ([32mINFO[0m):
+> Client connected
+07/04/2024 11:19:56 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[null(0)]: ServerThread created
+07/04/2024 11:19:56 [Project.server.Server] ([32mINFO[0m):
+> Waiting for next client
+07/04/2024 11:19:56 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[null(-1)]: Thread starting
+07/04/2024 11:19:56 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[null(-1)]: Received from my client: Payload[CLIENT_CONNECT] Client Id [0] Message: [null] Client Name [Jason] Status [disconnect]
+07/04/2024 11:19:56 [Project.server.Server] ([32mINFO[0m):
+> Server: *Jason[1] initialized*
+07/04/2024 11:19:56 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: sending room status to lobby recipients
+07/04/2024 11:19:56 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: Jason[1] joined the Room[lobby]
+07/04/2024 11:20:00 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[Jason(1)]: Received from my client: RollPayload[sides=6, rolls=2]
+07/04/2024 11:20:00 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: sending message to lobby recipients: 1
+07/04/2024 11:20:26 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[Jason(1)]: Received from my client: RollPayload[sides=8, rolls=2]
+07/04/2024 11:20:26 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: sending message to lobby recipients: 1
+07/04/2024 11:39:54 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[Jason(1)]: Received from my client: RollPayload[sides=0, rolls=0]
+07/04/2024 11:39:54 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: sending message to lobby recipients: 1
+07/04/2024 11:40:06 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[Jason(1)]: Received from my client: Payload[MESSAGE] Client Id [0] Message: [clear]
+07/04/2024 11:40:06 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: sending message to lobby recipients: 1
+07/04/2024 11:40:09 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[Jason(1)]: IO exception while reading from client
+07/04/2024 11:40:09 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[Jason(1)]: Exited thread loop. Cleaning up connection
+07/04/2024 11:40:09 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[Jason(1)]: ServerThread cleanup() start
+07/04/2024 11:40:09 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[Jason(1)]: ServerThread cleanup() end
+07/04/2024 11:40:25 [Project.server.Server] ([32mINFO[0m):
+> Client connected
+07/04/2024 11:40:25 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[null(0)]: ServerThread created
+07/04/2024 11:40:25 [Project.server.Server] ([32mINFO[0m):
+> Waiting for next client
+07/04/2024 11:40:25 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[null(-1)]: Thread starting
+07/04/2024 11:40:25 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[null(-1)]: Received from my client: Payload[CLIENT_CONNECT] Client Id [0] Message: [null] Client Name [Jason] Status [disconnect]
+07/04/2024 11:40:25 [Project.server.Server] ([32mINFO[0m):
+> Server: *Jason[2] initialized*
+07/04/2024 11:40:25 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: sending room status to lobby recipients
+07/04/2024 11:40:25 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: Jason[2] joined the Room[lobby]
+07/04/2024 11:40:31 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[Jason(2)]: Received from my client: RollPayload[sides=6, rolls=2]
+07/04/2024 11:40:31 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: sending message to lobby recipients: 2
+07/04/2024 11:40:37 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[Jason(2)]: Received from my client: RollPayload[sides=8, rolls=4]
+07/04/2024 11:40:37 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: sending message to lobby recipients: 2
+07/04/2024 11:40:43 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[Jason(2)]: Received from my client: RollPayload[sides=6, rolls=1]
+07/04/2024 11:40:43 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: sending message to lobby recipients: 2
+07/04/2024 11:42:38 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[Jason(2)]: Received from my client: Payload[FLIP] Client Id [0] Message: [Jason flipped a coin and got heads]
+07/04/2024 11:42:38 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: sending message to lobby recipients: 2
+07/04/2024 11:42:41 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[Jason(2)]: Received from my client: Payload[FLIP] Client Id [0] Message: [Jason flipped a coin and got heads]
+07/04/2024 11:42:41 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: sending message to lobby recipients: 2
+07/04/2024 11:42:44 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[Jason(2)]: Received from my client: Payload[FLIP] Client Id [0] Message: [Jason flipped a coin and got heads]
+07/04/2024 11:42:44 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: sending message to lobby recipients: 2
+07/04/2024 11:42:46 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[Jason(2)]: Received from my client: Payload[FLIP] Client Id [0] Message: [Jason flipped a coin and got tails]
+07/04/2024 11:42:46 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: sending message to lobby recipients: 2
+07/04/2024 13:39:25 [Project.server.Server] ([32mINFO[0m):
+> JVM is shutting down. Perform cleanup tasks.
+07/07/2024 10:25:44 [Project.server.Server] ([32mINFO[0m):
+> Server Starting
+07/07/2024 10:25:44 [Project.server.Server] ([32mINFO[0m):
+> Listening on port 3000
+07/07/2024 10:25:44 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: created
+07/07/2024 10:25:44 [Project.server.Server] ([32mINFO[0m):
+> Created new Room lobby
+07/07/2024 10:25:44 [Project.server.Server] ([32mINFO[0m):
+> Waiting for next client
+07/07/2024 10:26:11 [Project.server.Server] ([32mINFO[0m):
+> Client connected
+07/07/2024 10:26:11 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[null(0)]: ServerThread created
+07/07/2024 10:26:11 [Project.server.Server] ([32mINFO[0m):
+> Waiting for next client
+07/07/2024 10:26:11 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[null(-1)]: Thread starting
+07/07/2024 10:26:11 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[null(-1)]: Received from my client: Payload[CLIENT_CONNECT] Client Id [0] Message: [null] Client Name [jason] Status [disconnect]
+07/07/2024 10:26:11 [Project.server.Server] ([32mINFO[0m):
+> Server: *jason[1] initialized*
+07/07/2024 10:26:11 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: sending room status to lobby recipients
+07/07/2024 10:26:11 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: jason[1] joined the Room[lobby]
+07/07/2024 10:26:33 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[jason(1)]: Received from my client: Payload[MESSAGE] Client Id [0] Message: [**hey**]
+07/07/2024 10:26:33 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: sending message to lobby recipients: 1
+07/07/2024 10:26:40 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[jason(1)]: Received from my client: Payload[MESSAGE] Client Id [0] Message: [*hey*]
+07/07/2024 10:26:40 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: sending message to lobby recipients: 1
+07/07/2024 10:28:00 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[jason(1)]: Received from my client: Payload[MESSAGE] Client Id [0] Message: [test _underlined_]
+07/07/2024 10:28:00 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: sending message to lobby recipients: 1
+07/07/2024 10:28:19 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[jason(1)]: Received from my client: Payload[MESSAGE] Client Id [0] Message: [Color #r red r#]
+07/07/2024 10:28:19 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: sending message to lobby recipients: 1
+07/07/2024 10:28:46 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[jason(1)]: Received from my client: Payload[MESSAGE] Client Id [0] Message: [**hey** i *like* the color #b blue b#]
+07/07/2024 10:28:46 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: sending message to lobby recipients: 1
+07/07/2024 10:29:16 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[jason(1)]: Received from my client: Payload[MESSAGE] Client Id [0] Message: [i like #g green! g#]
+07/07/2024 10:29:16 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: sending message to lobby recipients: 1
+07/07/2024 12:08:48 [Project.server.Server] ([32mINFO[0m):
+> Server Starting
+07/07/2024 12:08:48 [Project.server.Server] ([32mINFO[0m):
+> Listening on port 3000
+07/07/2024 12:08:48 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: created
+07/07/2024 12:08:48 [Project.server.Server] ([32mINFO[0m):
+> Created new Room lobby
+07/07/2024 12:08:48 [Project.server.Server] ([32mINFO[0m):
+> Waiting for next client
+07/07/2024 12:09:05 [Project.server.Server] ([32mINFO[0m):
+> Client connected
+07/07/2024 12:09:05 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[null(0)]: ServerThread created
+07/07/2024 12:09:05 [Project.server.Server] ([32mINFO[0m):
+> Waiting for next client
+07/07/2024 12:09:05 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[null(-1)]: Thread starting
+07/07/2024 12:09:05 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[null(-1)]: Received from my client: Payload[CLIENT_CONNECT] Client Id [0] Message: [null] Client Name [jason] Status [disconnect]
+07/07/2024 12:09:05 [Project.server.Server] ([32mINFO[0m):
+> Server: *jason[1] initialized*
+07/07/2024 12:09:05 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: sending room status to lobby recipients
+07/07/2024 12:09:05 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: jason[1] joined the Room[lobby]
+07/07/2024 12:09:11 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[jason(1)]: Received from my client: RollPayload[sides=6, rolls=1]
+07/07/2024 12:09:11 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: sending message to lobby recipients: 1
+07/07/2024 12:09:13 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[jason(1)]: Received from my client: RollPayload[sides=8, rolls=1]
+07/07/2024 12:09:13 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: sending message to lobby recipients: 1
+07/07/2024 12:09:16 [Project.server.ServerThread] ([32mINFO[0m):
+> ServerThread[jason(1)]: Received from my client: RollPayload[sides=10, rolls=1]
+07/07/2024 12:09:16 [Project.server.Room] ([32mINFO[0m):
+> Room[lobby]: sending message to lobby recipients: 1

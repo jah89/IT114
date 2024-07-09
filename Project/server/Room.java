@@ -1,6 +1,10 @@
-package Project;
+package Project.server;
 
 import java.util.concurrent.ConcurrentHashMap;
+
+import Project.common.LoggerUtil;
+import Project.common.Payload;
+import Project.common.RollPayload;
 
 public class Room implements AutoCloseable{
     private String name;// unique name of the Room
@@ -10,13 +14,13 @@ public class Room implements AutoCloseable{
     public final static String LOBBY = "lobby";
 
     private void info(String message) {
-        System.out.println(String.format("Room[%s]: %s", name, message));
+        LoggerUtil.INSTANCE.info(String.format("Room[%s]: %s", name, message));
     }
 
     public Room(String name) {
         this.name = name;
         isRunning = true;
-        System.out.println(String.format("Room[%s] created", this.name));
+        info("created");
     }
 
     public String getName() {
@@ -66,7 +70,6 @@ public class Room implements AutoCloseable{
      * 
      * @param client
      */
-    //jah89 06/24/2024
     protected synchronized void disconnect(ServerThread client) {
         if (!isRunning) { // block action if Room isn't running
             return;
@@ -182,33 +185,31 @@ public class Room implements AutoCloseable{
      * @param sender  ServerThread (client) sending the message or null if it's a
      *                server-generated message
      */
-    //jah89 06/24/2024
     protected synchronized void sendMessage(ServerThread sender, String message) {
         if (!isRunning) { // block action if Room isn't running
             return;
         }
+        //JAH89 07-07-2024
+        message = processMessageFormatting(message);
 
-        // Note: any desired changes to the message must be done before this section
         long senderId = sender == null ? ServerThread.DEFAULT_CLIENT_ID : sender.getClientId();
-
-        // loop over clients and send out the message; remove client if message failed
-        // to be sent
-        // Note: this uses a lambda expression for each item in the values() collection,
-        // it's one way we can safely remove items during iteration
+        final String finalMessage = message;
+    
         info(String.format("sending message to %s recipients: %s", getName(), clientsInRoom.size(), message));
         clientsInRoom.values().removeIf(client -> {
-            boolean failedToSend = !client.sendMessage(senderId, message);
+            boolean failedToSend = !client.sendMessage(senderId, finalMessage);
             if (failedToSend) {
                 info(String.format("Removing disconnected client[%s] from list", client.getClientId()));
                 disconnect(client);
             }
             return failedToSend;
         });
+
+
     }
     // end send data to client(s)
 
     // receive data from ServerThread
-    //jah89 06/24/2024
     protected void handleCreateRoom(ServerThread sender, String room) {
         if (Server.INSTANCE.createRoom(room)) {
             Server.INSTANCE.joinRoom(room, sender);
@@ -223,9 +224,44 @@ public class Room implements AutoCloseable{
         }
     }
 
+    protected void handleListRooms(ServerThread sender, String roomQuery){
+        sender.sendRooms(Server.INSTANCE.listRooms(roomQuery));
+    }
+
     protected void clientDisconnect(ServerThread sender) {
         disconnect(sender);
     }
+
+    //jah89 07-04-2024
+protected synchronized void processRollCommand(ServerThread sender, RollPayload rollPayload) { 
+        String message = rollPayload.getMessage();
+        sendMessage(sender, message);
+    }
+
+    protected synchronized void processFlipCommand(ServerThread sender, Payload flipPayload) {
+        // Extract flip result from flipPayload and broadcast to all clients
+        String message = flipPayload.getMessage();
+        sendMessage(sender, message);
+    }
+    //jah89 07-07-2024
+    private String processMessageFormatting(String message) {
+        // Bold **
+        message = message.replaceAll("\\*\\*(.*?)\\*\\*", "<b>$1</b>");
+
+        // Italics *
+        message = message.replaceAll("\\*(.*?)\\*", "<i>$1</i>");
+
+        // Underline _ text_
+        message = message.replaceAll("_(.*?)_", "<u>$1</u>");
+
+        // Colors #r text r#
+        message = message.replaceAll("#r(.*?)r#", "<red>$1</red>");
+        message = message.replaceAll("#g(.*?)g#", "<green>$1</green>");
+        message = message.replaceAll("#b(.*?)b#", "<blue>$1</blue>");
+
+        return message;
+    }
+
 
     // end receive data from ServerThread
 }
