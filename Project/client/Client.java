@@ -507,43 +507,45 @@ public enum Client {
             }
         }
     } 
-      private void handleRollCommand(String text) {   //jah89 07/03/2024
-    RollPayload rollPayload = new RollPayload();
-    String[] parts = text.split(" ");
-    if (parts.length == 2) {
-        String rollCommand = parts[1];
-        if (rollCommand.matches("\\d+")) {
-            int max = Integer.parseInt(rollCommand);
-            int result = random.nextInt(max + 1);
-            rollPayload.setSides(max);
-            rollPayload.setRolls(1);
-            rollPayload.setMessage(String.format("%s rolled %d and got %d", myData.getClientName(), max, result));
-            System.out.println(rollPayload.getMessage());
-        } else if (rollCommand.matches("\\d+d\\d+")) {  //jah89 07-07-2024
-            String[] diceParts = rollCommand.split("d");
-            int rolls = Integer.parseInt(diceParts[0]);
-            int sides = Integer.parseInt(diceParts[1]);
-            int result = 0;
-            for (int i = 0; i < rolls; i++) {
-                result += random.nextInt(sides) + 1;
+    private void handleRollCommand(String text) {   //jah89 07/03/2024
+        RollPayload rollPayload = new RollPayload();
+        String[] parts = text.split(" ");
+        if (parts.length == 2) {
+            String rollCommand = parts[1];
+            if (rollCommand.matches("\\d+")) {
+                int max = Integer.parseInt(rollCommand);
+                int result = random.nextInt(max + 1);
+                rollPayload.setSides(max);
+                rollPayload.setRolls(1);
+                rollPayload.setMessage(String.format("%s rolled %d and got %d", myData.getClientName(), max, result));
+                System.out.println(rollPayload.getMessage());
+            } else if (rollCommand.matches("\\d+d\\d+")) {  //jah89 07-07-2024
+                String[] diceParts = rollCommand.split("d");
+                int rolls = Integer.parseInt(diceParts[0]);
+                int sides = Integer.parseInt(diceParts[1]);
+                int result = 0;
+                for (int i = 0; i < rolls; i++) {
+                    result += random.nextInt(sides) + 1;
+                }
+                rollPayload.setSides(sides);
+                rollPayload.setRolls(rolls);
+                rollPayload.setMessage(String.format("%s rolled %sd%d and got %d", myData.getClientName(), rolls, sides, result));
+                System.out.println(rollPayload.getMessage());
             }
-            rollPayload.setSides(sides);
-            rollPayload.setRolls(rolls);
-            rollPayload.setMessage(String.format("%s rolled %sd%d and got %d", myData.getClientName(), rolls, sides, result));
-            System.out.println(rollPayload.getMessage());
-        rollPayload.setPayloadType(PayloadType.ROLL);
-        send(rollPayload);
+            rollPayload.setPayloadType(PayloadType.ROLL);
+            send(rollPayload);
+        }
     }
-}
-//jah89 07-04-2024
- private void handleFlipCommand() { 
-    Payload flipPayload = new Payload();
-    flipPayload.setPayloadType(PayloadType.FLIP);
-    String result = random.nextBoolean() ? "heads" : "tails";
-    flipPayload.setMessage(String.format("%s flipped a coin and got %s", myData.getClientName(), result));
-    System.out.println(flipPayload.getMessage());
-    send(flipPayload);
-    // end payload processors
-
-}
+    
+    //jah89 07-04-2024
+    private void handleFlipCommand() { 
+        Payload flipPayload = new Payload();
+        flipPayload.setPayloadType(PayloadType.FLIP);
+        String result = random.nextBoolean() ? "heads" : "tails";
+        flipPayload.setMessage(String.format("%s flipped a coin and got %s", myData.getClientName(), result));
+        System.out.println(flipPayload.getMessage());
+        send(flipPayload);
+        // end payload processors
+    }
+    
 }
