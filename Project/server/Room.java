@@ -308,6 +308,15 @@ public class Room implements AutoCloseable {
         }
         return null; // Client not found
     }
-
+    public void sendPrivateMessage(ServerThread sender, long targetId, String message) { //jah89 07-20-2024
+        ServerThread target = getClient(targetId);
+        if (target == null) {
+            sender.sendMessage("User not found.");
+            return;
+        }
+        String formattedMessage = sender.getClientName() + " (private): " + message;
+        sender.sendMessage(formattedMessage);
+        target.sendMessage(formattedMessage);
+    }
     // end receive data from ServerThread
 }

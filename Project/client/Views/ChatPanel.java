@@ -121,14 +121,30 @@ public class ChatPanel extends JPanel {
             }
         });
 
-        sendButton.addActionListener((event) -> { // jah89 07-20-2024
+        sendButton.addActionListener((event) -> {
             SwingUtilities.invokeLater(() -> {
                 try {
-                    String text = messageInput.getText().trim(); // jah89 07-20-2024
+                    String text = messageInput.getText().trim();
                     if (!text.isEmpty()) {
-                        Client.INSTANCE.sendMessage(text);
-                        messageInput.setText(""); // Clear the original text // jah89 07-20-2024
-                        chatHistory.append("Me: " + text + "\n"); // Append to chat history // jah89 07-20-2024
+                        if (text.startsWith("@")) {
+                            // Handle private message
+                            int spaceIndex = text.indexOf(" ");
+                            if (spaceIndex != -1) {
+                                String targetName = text.substring(1, spaceIndex);
+                                String privateMessage = text.substring(spaceIndex + 1);
+                                long targetId = Client.INSTANCE.getClientIdByName(targetName);  //JAH89 07-20-2024
+                                if (targetId == -1) {
+                                    chatHistory.append("User " + targetName + " not found.\n");
+                                } else {
+                                    Client.INSTANCE.sendPrivateMessage(targetId, privateMessage);
+                                    chatHistory.append("To " + targetName + ": " + privateMessage + "\n");
+                                }
+                            }
+                        } else {
+                            Client.INSTANCE.sendMessage(text);
+                            chatHistory.append("Me: " + text + "\n");
+                        }
+                        messageInput.setText(""); // Clear the original text
                     }
                 } catch (NullPointerException | IOException e) {
                     LoggerUtil.INSTANCE.severe("Error sending message", e);

@@ -133,13 +133,18 @@ public class ServerThread extends BaseServerThread {
                 case UNMUTE: // jah89 07-20-2024
                     currentRoom.handleUnmute(clientId, payload.getMessage());
                     break;
-                default:
-                    break;
-            }
-        } catch (Exception e) {
-            LoggerUtil.INSTANCE.severe("Could not process Payload: " + payload, e);
+                    case PRIVATE_MESSAGE:
+                long targetId = payload.getClientId();
+                String privateMessage = payload.getMessage();
+                currentRoom.sendPrivateMessage(this, targetId, privateMessage);
+                break;
+            default:
+                break;
         }
+    } catch (Exception e) {
+        LoggerUtil.INSTANCE.severe("Could not process Payload: " + payload, e);
     }
+}
 
     // send methods to pass data back to the Client
 

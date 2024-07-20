@@ -716,6 +716,20 @@ public enum Client {
         p.setMessage(targetName);
         send(p);
     }
-
+    public void sendPrivateMessage(long targetId, String message) throws IOException {
+        Payload p = new Payload();
+        p.setPayloadType(PayloadType.PRIVATE_MESSAGE); // Add this new PayloadType
+        p.setClientId(targetId);
+        p.setMessage(message);
+        send(p);
+    }
+    public long getClientIdByName(String name) {
+        for (ClientData client : knownClients.values()) {
+            if (client.getClientName().equalsIgnoreCase(name)) {
+                return client.getClientId();
+            }
+        }
+        return -1; // Client not found
+    }
     // end payload processors
 }
