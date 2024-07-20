@@ -1,7 +1,8 @@
 package Project.client.Views;
 
+import Project.client.CardView;
+import Project.client.Interfaces.ICardControls;
 import java.awt.BorderLayout;
-
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -11,9 +12,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
-import Project.client.CardView;
-import Project.client.Interfaces.ICardControls;
-
 /**
  * ConnectionPanel is a JPanel that allows the user to input the host and port
  * for a connection. It uses a BorderLayout with a BoxLayout for the content
@@ -22,6 +20,7 @@ import Project.client.Interfaces.ICardControls;
 public class ConnectionPanel extends JPanel {
     private String host;
     private int port;
+    private String username; // Declare the username variable
 
     /**
      * Constructs a ConnectionPanel with the specified controls.
@@ -34,6 +33,16 @@ public class ConnectionPanel extends JPanel {
         JPanel content = new JPanel();
         content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
         content.setBorder(new EmptyBorder(10, 10, 10, 10)); // Add padding
+
+        // Add username input field - jah89 07/19/2024
+        JLabel userLabel = new JLabel("Username:");
+        JTextField userValue = new JTextField();
+        userValue.setToolTipText("Enter your username (no spaces)"); 
+        JLabel userError = new JLabel();
+        userError.setVisible(false); // Initially hide the error label
+        content.add(userLabel);
+        content.add(userValue);
+        content.add(userError);
 
         // Add host input field
         JLabel hostLabel = new JLabel("Host:");
@@ -69,6 +78,17 @@ public class ConnectionPanel extends JPanel {
                     portError.setVisible(true); // Show error label if invalid
                     isValid = false;
                 }
+
+                // Validate username - jah89 07/19/2024
+                username = userValue.getText().trim();
+                if (username.isEmpty() || username.contains(" ")) {
+                    userError.setText("Invalid username, must not be empty or contain spaces");
+                    userError.setVisible(true); // Show error label if invalid
+                    isValid = false;
+                } else {
+                    userError.setVisible(false); // Hide error label if valid
+                }
+
                 if (isValid) {
                     host = hostValue.getText();
                     controls.next(); // Navigate to the next card
@@ -100,5 +120,15 @@ public class ConnectionPanel extends JPanel {
      */
     public int getPort() {
         return port;
+    }
+
+    /**
+     * Gets the username entered by the user.
+     * 
+     * @return the username.
+     * jah89 07/19/2024
+     */
+    public String getUsername() {
+        return username;
     }
 }

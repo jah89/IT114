@@ -174,6 +174,23 @@ public enum Client {
      * @throws IOException
      */
     private boolean processClientCommand(String text) throws IOException {
+        if (text.startsWith("/mute")) { // jah89 07-20-2024
+            String targetName = text.replace("/mute", "").trim();
+            if (targetName.isEmpty() || !knownClients.values().stream().anyMatch(c -> c.getClientName().equals(targetName))) {
+                System.out.println("User not found.");
+            } else {
+                sendMute(targetName);
+            }
+            return true;
+        } else if (text.startsWith("/unmute")) { // jah89 07-20-2024
+            String targetName = text.replace("/unmute", "").trim();
+            if (targetName.isEmpty() || !knownClients.values().stream().anyMatch(c -> c.getClientName().equals(targetName))) {
+                System.out.println("User not found.");
+            } else {
+                sendUnmute(targetName);
+            }
+            return true;
+        }
         if (isConnection(text)) {
             if (myData.getClientName() == null || myData.getClientName().length() == 0) {
                 System.out.println(TextFX.colorize("Name must be set first via /name command", Color.RED));
@@ -687,7 +704,18 @@ public enum Client {
             LoggerUtil.INSTANCE.severe("Error sending flip payload", e);
         }
     }
-    
+    public void sendMute(String targetName) throws IOException { // jah89 07-20-2024
+        Payload p = new Payload();
+        p.setPayloadType(PayloadType.MUTE);
+        p.setMessage(targetName);
+        send(p);
+    }
+    public void sendUnmute(String targetName) throws IOException { // jah89 07-20-2024
+        Payload p = new Payload();
+        p.setPayloadType(PayloadType.UNMUTE);
+        p.setMessage(targetName);
+        send(p);
+    }
 
     // end payload processors
 }

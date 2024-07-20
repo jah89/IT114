@@ -86,90 +86,90 @@ public class UserListPanel extends JPanel {
     /**
      * Adds a user to the list.
      *
-     * @param clientId   The ID of the client.
-     * @param clientName The name of the client.
+     * @param clientId   The ID of the client. // jah89 07-20-2024
+     * @param clientName The name of the client. // jah89 07-20-2024
      */
-    protected void addUserListItem(long clientId, String clientName) {
-        SwingUtilities.invokeLater(() -> {
-            if (userItemsMap.containsKey(clientId)) {
-                LoggerUtil.INSTANCE.warning("User already in the list: " + clientName);
-                return; // User already in the list
+    protected void addUserListItem(long clientId, String clientName) { // jah89 07-20-2024
+        SwingUtilities.invokeLater(() -> { // jah89 07-20-2024
+            if (userItemsMap.containsKey(clientId)) { // jah89 07-20-2024
+                LoggerUtil.INSTANCE.warning("User already in the list: " + clientName); // jah89 07-20-2024
+                return; // jah89 07-20-2024
             }
 
-            LoggerUtil.INSTANCE.info("Adding user to list: " + clientName);
+            LoggerUtil.INSTANCE.info("Adding user to list: " + clientName); // jah89 07-20-2024
 
-            UserListItem userItem = new UserListItem(clientId, clientName, userListArea);
+            UserListItem userItem = new UserListItem(clientId, clientName, userListArea); // jah89 07-20-2024
 
-            // GridBagConstraints settings for each user
-            GridBagConstraints gbc = new GridBagConstraints();
-            gbc.gridx = 0; // Column index 0
-            gbc.gridy = userListArea.getComponentCount() - 1; // Place before the glue
-            gbc.weightx = 1; // Let the component grow horizontally to fill the space
-            gbc.anchor = GridBagConstraints.NORTH; // Anchor to the top
-            gbc.fill = GridBagConstraints.HORIZONTAL; // Fill horizontally
-            gbc.insets = new Insets(0, 0, 5, 0); // Add spacing between users
+            // GridBagConstraints settings for each user // jah89 07-20-2024
+            GridBagConstraints gbc = new GridBagConstraints(); // jah89 07-20-2024
+            gbc.gridx = 0; // Column index 0 // jah89 07-20-2024
+            gbc.gridy = userListArea.getComponentCount() - 1; // Place before the glue // jah89 07-20-2024
+            gbc.weightx = 1; // Let the component grow horizontally to fill the space // jah89 07-20-2024
+            gbc.anchor = GridBagConstraints.NORTH; // Anchor to the top // jah89 07-20-2024
+            gbc.fill = GridBagConstraints.HORIZONTAL; // Fill horizontally // jah89 07-20-2024
+            gbc.insets = new Insets(0, 0, 5, 0); // Add spacing between users // jah89 07-20-2024
 
-            // Remove the last glue component if it exists
-            if (lastConstraints != null) {
-                int index = userListArea.getComponentCount() - 1;
-                if (index > -1) {
-                    userListArea.remove(index);
+            // Remove the last glue component if it exists // jah89 07-20-2024
+            if (lastConstraints != null) { // jah89 07-20-2024
+                int index = userListArea.getComponentCount() - 1; // jah89 07-20-2024
+                if (index > -1) { // jah89 07-20-2024
+                    userListArea.remove(index); // jah89 07-20-2024
                 }
             }
-            // Add user item
-            userListArea.add(userItem, gbc);
+            // Add user item // jah89 07-20-2024
+            userListArea.add(userItem, gbc); // jah89 07-20-2024
 
-            // Add vertical glue to push items to the top
-            userListArea.add(Box.createVerticalGlue(), lastConstraints);
+            // Add vertical glue to push items to the top // jah89 07-20-2024
+            userListArea.add(Box.createVerticalGlue(), lastConstraints); // jah89 07-20-2024
 
-            userItemsMap.put(clientId, userItem); // Add to the map
+            userItemsMap.put(clientId, userItem); // Add to the map // jah89 07-20-2024
 
-            userListArea.revalidate();
-            userListArea.repaint();
-        });
+            userListArea.revalidate(); // jah89 07-20-2024
+            userListArea.repaint(); // jah89 07-20-2024
+        }); // jah89 07-20-2024
     }
 
     /**
-     * Adjusts the width of all user list items.
+     * Adjusts the width of all user list items. // jah89 07-20-2024
      */
-    private void adjustUserListItemsWidth() {
-        SwingUtilities.invokeLater(() -> {
-            for (UserListItem item : userItemsMap.values()) {
-                item.setPreferredSize(
-                        new Dimension(userListArea.getWidth() - 20, item.getPreferredSize().height));
+    private void adjustUserListItemsWidth() { // jah89 07-20-2024
+        SwingUtilities.invokeLater(() -> { // jah89 07-20-2024
+            for (UserListItem item : userItemsMap.values()) { // jah89 07-20-2024
+                item.setPreferredSize( // jah89 07-20-2024
+                        new Dimension(userListArea.getWidth() - 20, item.getPreferredSize().height)); // jah89 07-20-2024
             }
-            userListArea.revalidate();
-            userListArea.repaint();
-        });
+            userListArea.revalidate(); // jah89 07-20-2024
+            userListArea.repaint(); // jah89 07-20-2024
+        }); // jah89 07-20-2024
     }
 
     /**
-     * Removes a user from the list.
+     * Removes a user from the list. // jah89 07-20-2024
      *
-     * @param clientId The ID of the client to be removed.
+     * @param clientId The ID of the client to be removed. // jah89 07-20-2024
      */
-    protected void removeUserListItem(long clientId) {
-        SwingUtilities.invokeLater(() -> {
-            LoggerUtil.INSTANCE.info("Removing user list item for id " + clientId);
-            UserListItem item = userItemsMap.remove(clientId); // Remove from the map
-            if (item != null) {
-                userListArea.remove(item);
-                userListArea.revalidate();
-                userListArea.repaint();
+    protected void removeUserListItem(long clientId) { // jah89 07-20-2024
+        SwingUtilities.invokeLater(() -> { // jah89 07-20-2024
+            LoggerUtil.INSTANCE.info("Removing user list item for id " + clientId); // jah89 07-20-2024
+            UserListItem item = userItemsMap.remove(clientId); // Remove from the map // jah89 07-20-2024
+            if (item != null) { // jah89 07-20-2024
+                userListArea.remove(item); // jah89 07-20-2024
+                userListArea.revalidate(); // jah89 07-20-2024
+                userListArea.repaint(); // jah89 07-20-2024
             }
-        });
+        }); // jah89 07-20-2024
     }
 
     /**
-     * Clears the user list.
+     * Clears the user list. // jah89 07-20-2024
      */
-    protected void clearUserList() {
-        SwingUtilities.invokeLater(() -> {
-            LoggerUtil.INSTANCE.info("Clearing user list");
-            userItemsMap.clear(); // Clear the map
-            userListArea.removeAll();
-            userListArea.revalidate();
-            userListArea.repaint();
-        });
+    protected void clearUserList() { // jah89 07-20-2024
+        SwingUtilities.invokeLater(() -> { // jah89 07-20-2024
+            LoggerUtil.INSTANCE.info("Clearing user list"); // jah89 07-20-2024
+            userItemsMap.clear(); // Clear the map // jah89 07-20-2024
+            userListArea.removeAll(); // jah89 07-20-2024
+            userListArea.revalidate(); // jah89 07-20-2024
+            userListArea.repaint(); // jah89 07-20-2024
+        }); // jah89 07-20-2024
     }
 }

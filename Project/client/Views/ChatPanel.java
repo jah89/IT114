@@ -27,6 +27,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
@@ -40,6 +41,9 @@ public class ChatPanel extends JPanel {
     private JPanel chatArea = null;
     private UserListPanel userListPanel;
     private final float CHAT_SPLIT_PERCENT = 0.7f;
+    private JTextArea chatHistory; // jah89 07-20-2024
+    private JTextField messageInput; // jah89 
+    private JButton sendButton; // jah89 
 
     /**
      * Constructor to create the ChatPanel UI.
@@ -87,16 +91,20 @@ public class ChatPanel extends JPanel {
             }
         });
 
+        chatHistory = new JTextArea(); // jah89 07-20-2024
+        chatHistory.setEditable(false); // jah89 07-20-2024
+        JScrollPane chatScrollPane = new JScrollPane(chatHistory); // jah89 07-20-2024
+
         JPanel input = new JPanel();
         input.setLayout(new BoxLayout(input, BoxLayout.X_AXIS));
         input.setBorder(new EmptyBorder(5, 5, 5, 5)); // Add padding
 
-        JTextField textValue = new JTextField();
-        input.add(textValue);
+        messageInput = new JTextField(); // jah89 07-20-2024
+        input.add(messageInput); // jah89 07-20-2024
 
-        JButton button = new JButton("Send");
+        sendButton = new JButton("Send"); // jah89 07-20-2024
         // Allows submission with the enter key instead of just the button click
-        textValue.addKeyListener(new KeyListener() {
+        messageInput.addKeyListener(new KeyListener() { // jah89 07-20-2024
             @Override
             public void keyTyped(KeyEvent e) {
             }
@@ -104,7 +112,7 @@ public class ChatPanel extends JPanel {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    button.doClick();
+                    sendButton.doClick(); // jah89 07-20-2024
                 }
             }
 
@@ -113,13 +121,14 @@ public class ChatPanel extends JPanel {
             }
         });
 
-        button.addActionListener((event) -> {
+        sendButton.addActionListener((event) -> { // jah89 07-20-2024
             SwingUtilities.invokeLater(() -> {
                 try {
-                    String text = textValue.getText().trim();
+                    String text = messageInput.getText().trim(); // jah89 07-20-2024
                     if (!text.isEmpty()) {
                         Client.INSTANCE.sendMessage(text);
-                        textValue.setText(""); // Clear the original text
+                        messageInput.setText(""); // Clear the original text // jah89 07-20-2024
+                        chatHistory.append("Me: " + text + "\n"); // Append to chat history // jah89 07-20-2024
                     }
                 } catch (NullPointerException | IOException e) {
                     LoggerUtil.INSTANCE.severe("Error sending message", e);
@@ -127,7 +136,7 @@ public class ChatPanel extends JPanel {
             });
         });
 
-        input.add(button);
+        input.add(sendButton); // jah89 07-20-2024
 
         this.add(splitPane, BorderLayout.CENTER);
         this.add(input, BorderLayout.SOUTH);

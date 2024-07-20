@@ -1,5 +1,15 @@
 package Project.client;
 
+import Project.client.Interfaces.ICardControls;
+import Project.client.Interfaces.IConnectionEvents;
+import Project.client.Interfaces.IMessageEvents;
+import Project.client.Interfaces.IRoomEvents;
+import Project.client.Views.ChatPanel;
+import Project.client.Views.ConnectionPanel;
+import Project.client.Views.Menu;
+import Project.client.Views.RoomsPanel;
+import Project.client.Views.UserDetailsPanel;
+import Project.common.LoggerUtil;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Component;
@@ -15,25 +25,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
+import javax.swing.JPanel; // jah89 07-20-2024
+import javax.swing.SwingUtilities; // jah89 07-20-2024
 
-import Project.client.Interfaces.ICardControls;
-import Project.client.Interfaces.IConnectionEvents;
-import Project.client.Interfaces.IMessageEvents;
-import Project.client.Interfaces.IRoomEvents;
-import Project.client.Views.ChatPanel;
-import Project.client.Views.ConnectionPanel;
-import Project.client.Views.Menu;
-import Project.client.Views.RoomsPanel;
-import Project.client.Views.UserDetailsPanel;
-
-import Project.common.LoggerUtil;
-
-/**
- * ClientUI is the main application window that manages different screens and
- * handles client events.
- */
 public class ClientUI extends JFrame implements IConnectionEvents, IMessageEvents, IRoomEvents, ICardControls {
     private CardLayout card = new CardLayout(); // Layout manager to switch between different screens
     private Container container; // Container to hold different panels
@@ -73,19 +67,19 @@ public class ClientUI extends JFrame implements IConnectionEvents, IMessageEvent
         container.add(roomLabel, BorderLayout.NORTH);
         container.add(cardContainer, BorderLayout.CENTER);
 
-        cardContainer.addComponentListener(new ComponentAdapter() {
+        cardContainer.addComponentListener(new ComponentAdapter() { // jah89 07-20-2024
             @Override
-            public void componentResized(ComponentEvent e) {
-                cardContainer.setPreferredSize(e.getComponent().getSize());
-                cardContainer.revalidate();
-                cardContainer.repaint();
-            }
+            public void componentResized(ComponentEvent e) { // jah89 07-20-2024
+                cardContainer.setPreferredSize(e.getComponent().getSize()); // jah89 07-20-2024
+                cardContainer.revalidate(); // jah89 07-20-2024
+                cardContainer.repaint(); // jah89 07-20-2024
+            } // jah89 07-20-2024
 
             @Override
-            public void componentMoved(ComponentEvent e) {
-                // No specific action on move
-            }
-        });
+            public void componentMoved(ComponentEvent e) { // jah89 07-20-2024
+                // No specific action on move // jah89 07-20-2024
+            } // jah89 07-20-2024
+        }); // jah89 07-20-2024
 
         setMinimumSize(new Dimension(400, 400));
         setLocationRelativeTo(null); // Center the window

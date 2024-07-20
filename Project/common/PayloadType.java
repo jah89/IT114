@@ -10,5 +10,7 @@ public enum PayloadType {
     MESSAGE,    // sender and message
     ROOM_LIST, 
     ROLL, //added 07/03/2024 to handle dice roll and flip 
-    FLIP
+    FLIP,
+    MUTE, //jah89 07-20-2024
+    UNMUTE
 }

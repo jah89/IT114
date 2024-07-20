@@ -6,8 +6,8 @@ import Project.common.LoggerUtil;
 import Project.common.Payload;
 import Project.common.RollPayload;
 
-public class Room implements AutoCloseable{
-    private String name;// unique name of the Room
+public class Room implements AutoCloseable {
+    private String name; // unique name of the Room
     private volatile boolean isRunning = false;
     private ConcurrentHashMap<Long, ServerThread> clientsInRoom = new ConcurrentHashMap<Long, ServerThread>();
 
@@ -79,7 +79,7 @@ public class Room implements AutoCloseable{
         client.disconnect();
         // removedClient(client); // <-- use this just for normal room leaving
         clientsInRoom.remove(client.getClientId());
-        
+
         // Improved logging with user data
         info(String.format("%s[%s] disconnected", client.getClientName(), id));
     }
@@ -125,6 +125,7 @@ public class Room implements AutoCloseable{
 
     /**
      * Sends to all clients details of a disconnect client
+     * 
      * @param client
      */
     protected synchronized void sendDisconnect(ServerThread client) {
@@ -189,12 +190,12 @@ public class Room implements AutoCloseable{
         if (!isRunning) { // block action if Room isn't running
             return;
         }
-        //JAH89 07-07-2024
+        // JAH89 07-07-2024
         message = processMessageFormatting(message);
 
         long senderId = sender == null ? ServerThread.DEFAULT_CLIENT_ID : sender.getClientId();
         final String finalMessage = message;
-    
+
         info(String.format("sending message to %s recipients: %s", getName(), clientsInRoom.size(), message));
         clientsInRoom.values().removeIf(client -> {
             boolean failedToSend = !client.sendMessage(senderId, finalMessage);
@@ -205,8 +206,8 @@ public class Room implements AutoCloseable{
             return failedToSend;
         });
 
-
     }
+
     // end send data to client(s)
 
     // receive data from ServerThread
@@ -224,7 +225,7 @@ public class Room implements AutoCloseable{
         }
     }
 
-    protected void handleListRooms(ServerThread sender, String roomQuery){
+    protected void handleListRooms(ServerThread sender, String roomQuery) {
         sender.sendRooms(Server.INSTANCE.listRooms(roomQuery));
     }
 
@@ -232,8 +233,8 @@ public class Room implements AutoCloseable{
         disconnect(sender);
     }
 
-    //jah89 07-04-2024
-protected synchronized void processRollCommand(ServerThread sender, RollPayload rollPayload) { 
+    // jah89 07-04-2024
+    protected synchronized void processRollCommand(ServerThread sender, RollPayload rollPayload) {
         String message = rollPayload.getMessage();
         sendMessage(sender, message);
     }
@@ -243,7 +244,8 @@ protected synchronized void processRollCommand(ServerThread sender, RollPayload 
         String message = flipPayload.getMessage();
         sendMessage(sender, message);
     }
-    //jah89 07-07-2024
+
+    // jah89 07-07-2024
     private String processMessageFormatting(String message) {
         // Bold **
         message = message.replaceAll("\\*\\*(.*?)\\*\\*", "<b>$1</b>");
@@ -256,12 +258,56 @@ protected synchronized void processRollCommand(ServerThread sender, RollPayload 
 
         // Colors #r text r#
         message = message.replaceAll("#r(.*?)r#", "<red>$1</red>");
-        message = message.replaceAll("#g(.*?)g#", "<green>$1</green>");
+        message = message.replaceAll("#g(.*?)g#", "<green>$1$</green>");
         message = message.replaceAll("#b(.*?)b#", "<blue>$1</blue>");
 
         return message;
     }
 
+    // jah89 07-20-2024
+    public void handleMute(long senderId, String targetName) {
+        ServerThread sender = getClient(senderId);
+        if (sender == null) return;
+        
+        ServerThread target = getClientByName(targetName);
+        if (target == null) {
+            sender.sendMessage("User not found.");
+            return;
+        }
+        
+        sender.addMutedClient(target.getClientId());
+        sender.sendMessage(targetName + " has been muted.");
+    }
+
+    // jah89 07-20-2024
+    public void handleUnmute(long senderId, String targetName) {
+        ServerThread sender = getClient(senderId);
+        if (sender == null) return;
+        
+        ServerThread target = getClientByName(targetName);
+        if (target == null) {
+            sender.sendMessage("User not found.");
+            return;
+        }
+        
+        sender.removeMutedClient(target.getClientId());
+        sender.sendMessage(targetName + " has been unmuted.");
+    }
+
+    // jah89 07-20-2024
+    public ServerThread getClient(long clientId) {
+        return clientsInRoom.get(clientId);
+    }
+
+    // jah89 07-20-2024
+    public ServerThread getClientByName(String clientName) {
+        for (ServerThread client : clientsInRoom.values()) {
+            if (client.getClientName().equalsIgnoreCase(clientName)) {
+                return client;
+            }
+        }
+        return null; // Client not found
+    }
 
     // end receive data from ServerThread
 }

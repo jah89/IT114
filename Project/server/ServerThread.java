@@ -7,8 +7,10 @@ import Project.common.PayloadType;
 import Project.common.RollPayload;
 import Project.common.RoomResultsPayload;
 import java.net.Socket;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.function.Consumer;
 
 /**
@@ -100,7 +102,11 @@ public class ServerThread extends BaseServerThread {
                     setClientName(cp.getClientName());
                     break;
                 case MESSAGE:
-                    currentRoom.sendMessage(this, payload.getMessage());
+                    if (!isClientMuted(payload.getClientId())) { // jah89 07-20-2024
+                        currentRoom.sendMessage(this, payload.getMessage());
+                    } else {
+                        info("Message from " + payload.getClientId() + " skipped due to being muted."); // jah89 07-20-2024
+                    }
                     break;
                 case ROOM_CREATE:
                     currentRoom.handleCreateRoom(this, payload.getMessage());
@@ -114,21 +120,24 @@ public class ServerThread extends BaseServerThread {
                 case DISCONNECT:
                     currentRoom.disconnect(this);
                     break;
-                    case ROLL:
-                RollPayload rollPayload = (RollPayload) payload;    //jah89 07/04/2024
-                currentRoom.processRollCommand(this, rollPayload);
-                break;
-            case FLIP:
-                currentRoom.processFlipCommand(this, payload);
-                break;
-            default:
-                break;
-        }
-                
-            
+                case ROLL:
+                    RollPayload rollPayload = (RollPayload) payload;    //jah89 07/04/2024
+                    currentRoom.processRollCommand(this, rollPayload);
+                    break;
+                case FLIP:
+                    currentRoom.processFlipCommand(this, payload);
+                    break;
+                case MUTE: // jah89 07-20-2024
+                    currentRoom.handleMute(clientId, payload.getMessage());
+                    break;
+                case UNMUTE: // jah89 07-20-2024
+                    currentRoom.handleUnmute(clientId, payload.getMessage());
+                    break;
+                default:
+                    break;
+            }
         } catch (Exception e) {
-            LoggerUtil.INSTANCE.severe("Could not process Payload: " + payload,e);
-        
+            LoggerUtil.INSTANCE.severe("Could not process Payload: " + payload, e);
         }
     }
 
@@ -167,6 +176,10 @@ public class ServerThread extends BaseServerThread {
      * @return @see {@link #send(Payload)}
      */
     public boolean sendMessage(long senderId, String message) {
+        if (isClientMuted(senderId)) { // jah89 07-20-2024
+            info("Message from " + senderId + " skipped due to being muted."); // log message
+            return true;
+        }
         Payload p = new Payload();
         p.setClientId(senderId);
         p.setMessage(message);
@@ -223,6 +236,21 @@ public class ServerThread extends BaseServerThread {
         cp.setClientId(clientId);
         cp.setClientName(clientName);
         return send(cp);
+    }
+
+    // Methods to manage muted clients - jah89 07-20-2024
+    private Set<Long> mutedClients = new HashSet<>();
+
+    public void addMutedClient(long clientId) {
+        mutedClients.add(clientId);
+    }
+
+    public void removeMutedClient(long clientId) {
+        mutedClients.remove(clientId);
+    }
+
+    public boolean isClientMuted(long clientId) {
+        return mutedClients.contains(clientId);
     }
 
     // end send methods

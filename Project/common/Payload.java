@@ -10,6 +10,8 @@ public class Payload implements Serializable {   //jah89 07-07-2024
     public PayloadType getPayloadType() {
         return payloadType;
     }
+    public static final int MUTE = 6; 
+    public static final int UNMUTE = 7;
 
     public void setPayloadType(PayloadType payloadType) {
         this.payloadType = payloadType;
