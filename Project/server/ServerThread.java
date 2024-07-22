@@ -133,7 +133,7 @@ public class ServerThread extends BaseServerThread {
                 case UNMUTE: // jah89 07-20-2024
                     currentRoom.handleUnmute(clientId, payload.getMessage());
                     break;
-                    case PRIVATE_MESSAGE:
+                    case PRIVATE_MESSAGE:  //jah89 07-20-2024
                 long targetId = payload.getClientId();
                 String privateMessage = payload.getMessage();
                 currentRoom.sendPrivateMessage(this, targetId, privateMessage);

@@ -193,20 +193,20 @@ public class Room implements AutoCloseable {
         // JAH89 07-07-2024
         message = processMessageFormatting(message);
 
-        long senderId = sender == null ? ServerThread.DEFAULT_CLIENT_ID : sender.getClientId();
-        final String finalMessage = message;
+    long senderId = sender == null ? ServerThread.DEFAULT_CLIENT_ID : sender.getClientId();
+    final String finalMessage = message;
 
-        info(String.format("sending message to %s recipients: %s", getName(), clientsInRoom.size(), message));
-        clientsInRoom.values().removeIf(client -> {
-            boolean failedToSend = !client.sendMessage(senderId, finalMessage);
-            if (failedToSend) {
-                info(String.format("Removing disconnected client[%s] from list", client.getClientId()));
-                disconnect(client);
-            }
-            return failedToSend;
-        });
+    info(String.format("sending message to %s recipients: %s", getName(), clientsInRoom.size(), message));
+    clientsInRoom.values().removeIf(client -> {
+        boolean failedToSend = !client.sendMessage(senderId, finalMessage);
+        if (failedToSend) {
+            info(String.format("Removing disconnected client[%s] from list", client.getClientId()));
+            disconnect(client);
+        }
+        return failedToSend;
+    });
+}
 
-    }
 
     // end send data to client(s)
 
@@ -234,17 +234,15 @@ public class Room implements AutoCloseable {
     }
 
     // jah89 07-04-2024
-    protected synchronized void processRollCommand(ServerThread sender, RollPayload rollPayload) {
-        String message = rollPayload.getMessage();
+    protected synchronized void processRollCommand(ServerThread sender, RollPayload rollPayload) { // jah89 07-04-2024
+        String message = String.format("<b>%s (roll result): %s</b>", sender.getClientName(), rollPayload.getMessage());
         sendMessage(sender, message);
     }
-
-    protected synchronized void processFlipCommand(ServerThread sender, Payload flipPayload) {
-        // Extract flip result from flipPayload and broadcast to all clients
-        String message = flipPayload.getMessage();
+    
+    protected synchronized void processFlipCommand(ServerThread sender, Payload flipPayload) { // jah89 07-04-2024
+        String message = String.format("<b>%s (flip result): %s</b>", sender.getClientName(), flipPayload.getMessage());
         sendMessage(sender, message);
     }
-
     // jah89 07-07-2024
     private String processMessageFormatting(String message) {
         // Bold **

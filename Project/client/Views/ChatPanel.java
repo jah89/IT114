@@ -100,11 +100,10 @@ public class ChatPanel extends JPanel {
         input.setBorder(new EmptyBorder(5, 5, 5, 5)); // Add padding
 
         messageInput = new JTextField(); // jah89 07-20-2024
-        input.add(messageInput); // jah89 07-20-2024
+        input.add(messageInput); 
 
-        sendButton = new JButton("Send"); // jah89 07-20-2024
-        // Allows submission with the enter key instead of just the button click
-        messageInput.addKeyListener(new KeyListener() { // jah89 07-20-2024
+        sendButton = new JButton("Send"); 
+        messageInput.addKeyListener(new KeyListener() { 
             @Override
             public void keyTyped(KeyEvent e) {
             }
@@ -112,10 +111,9 @@ public class ChatPanel extends JPanel {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    sendButton.doClick(); // jah89 07-20-2024
+                    sendButton.doClick(); 
                 }
             }
-
             @Override
             public void keyReleased(KeyEvent e) {
             }
@@ -124,15 +122,14 @@ public class ChatPanel extends JPanel {
         sendButton.addActionListener((event) -> {
             SwingUtilities.invokeLater(() -> {
                 try {
-                    String text = messageInput.getText().trim();
+                    String text = messageInput.getText().trim(); //JAH89 07-20-2024
                     if (!text.isEmpty()) {
                         if (text.startsWith("@")) {
-                            // Handle private message
                             int spaceIndex = text.indexOf(" ");
                             if (spaceIndex != -1) {
                                 String targetName = text.substring(1, spaceIndex);
                                 String privateMessage = text.substring(spaceIndex + 1);
-                                long targetId = Client.INSTANCE.getClientIdByName(targetName);  //JAH89 07-20-2024
+                                long targetId = Client.INSTANCE.getClientIdByName(targetName);  
                                 if (targetId == -1) {
                                     chatHistory.append("User " + targetName + " not found.\n");
                                 } else {

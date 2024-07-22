@@ -24,7 +24,7 @@ public class UserDetailsPanel extends JPanel {
      * 
      * @param controls The card controls interface to handle navigation.
      */
-    public UserDetailsPanel(ICardControls controls) {
+    public UserDetailsPanel(ICardControls controls) {  //jah89 
         super(new BorderLayout(10, 10));
 
         JPanel content = new JPanel();

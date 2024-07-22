@@ -930,3 +930,95 @@
 > Removing user list item for id 2
 07/20/2024 17:20:39 [Project.client.Views.UserListPanel] ([32mINFO[0m):
 > Removing user list item for id 2
+07/21/2024 19:53:54 [Project.client.Client] ([32mINFO[0m):
+> Client Created
+07/21/2024 19:53:54 [Project.client.ClientUI] ([34mFINE[0m):
+> Current panel: USER_INFO
+07/21/2024 19:53:55 [Project.client.Views.UserDetailsPanel] ([32mINFO[0m):
+> Chosen username: z
+07/21/2024 19:53:55 [Project.client.Client] ([32mINFO[0m):
+> Client connected
+07/21/2024 19:53:56 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[CLIENT_ID] Client Id [1] Message: [null] Client Name [z] Status [connect]
+07/21/2024 19:53:56 [Project.client.ClientUI] ([34mFINE[0m):
+> Current panel: CHAT
+07/21/2024 19:53:56 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[ROOM_JOIN] Client Id [1] Message: [lobby] Client Name [z] Status [connect]
+07/21/2024 19:53:56 [Project.client.ClientUI] ([32mINFO[0m):
+> Current card: CHAT
+07/21/2024 19:53:56 [Project.client.Views.UserListPanel] ([32mINFO[0m):
+> Adding user to list: z (1)
+07/21/2024 19:53:59 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [1] Message: [<b>z (roll result): z rolled 2d6 and got 6</b>]
+07/21/2024 19:58:03 [Project.client.Client] ([32mINFO[0m):
+> Client Created
+07/21/2024 19:58:03 [Project.client.ClientUI] ([34mFINE[0m):
+> Current panel: USER_INFO
+07/21/2024 19:58:04 [Project.client.Views.UserDetailsPanel] ([32mINFO[0m):
+> Chosen username: z
+07/21/2024 19:58:04 [Project.client.Client] ([32mINFO[0m):
+> Client connected
+07/21/2024 19:58:04 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[CLIENT_ID] Client Id [1] Message: [null] Client Name [z] Status [connect]
+07/21/2024 19:58:04 [Project.client.ClientUI] ([34mFINE[0m):
+> Current panel: CHAT
+07/21/2024 19:58:04 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[ROOM_JOIN] Client Id [1] Message: [lobby] Client Name [z] Status [connect]
+07/21/2024 19:58:04 [Project.client.ClientUI] ([32mINFO[0m):
+> Current card: CHAT
+07/21/2024 19:58:04 [Project.client.Views.UserListPanel] ([32mINFO[0m):
+> Adding user to list: z (1)
+07/21/2024 19:58:07 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [1] Message: [<b>z (roll result): z rolled 2d6 and got 5</b>]
+07/21/2024 19:58:13 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [1] Message: [<b>z (roll result): z rolled 2d7 and got 5</b>]
+07/21/2024 19:58:23 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [1] Message: [hi']
+07/21/2024 19:58:41 [Project.client.Client] ([32mINFO[0m):
+> Client Created
+07/21/2024 19:58:41 [Project.client.ClientUI] ([34mFINE[0m):
+> Current panel: USER_INFO
+07/21/2024 19:58:42 [Project.client.ClientUI] ([34mFINE[0m):
+> Current panel: CONNECT
+07/21/2024 19:58:43 [Project.client.ClientUI] ([34mFINE[0m):
+> Current panel: USER_INFO
+07/21/2024 19:58:45 [Project.client.Views.UserDetailsPanel] ([32mINFO[0m):
+> Chosen username: z
+07/21/2024 19:58:45 [Project.client.Client] ([32mINFO[0m):
+> Client connected
+07/21/2024 19:58:45 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[CLIENT_ID] Client Id [1] Message: [null] Client Name [z] Status [connect]
+07/21/2024 19:58:45 [Project.client.ClientUI] ([34mFINE[0m):
+> Current panel: CHAT
+07/21/2024 19:58:45 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[ROOM_JOIN] Client Id [1] Message: [lobby] Client Name [z] Status [connect]
+07/21/2024 19:58:45 [Project.client.ClientUI] ([32mINFO[0m):
+> Current card: CHAT
+07/21/2024 19:58:45 [Project.client.Views.UserListPanel] ([32mINFO[0m):
+> Adding user to list: z (1)
+07/21/2024 19:58:47 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [1] Message: [hi]
+07/21/2024 19:58:55 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [1] Message: [yo]
+07/21/2024 20:01:14 [Project.client.Client] ([32mINFO[0m):
+> Client Created
+07/21/2024 20:01:14 [Project.client.ClientUI] ([34mFINE[0m):
+> Current panel: USER_INFO
+07/21/2024 20:01:15 [Project.client.Views.UserDetailsPanel] ([32mINFO[0m):
+> Chosen username: z
+07/21/2024 20:01:15 [Project.client.Client] ([32mINFO[0m):
+> Client connected
+07/21/2024 20:01:15 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[CLIENT_ID] Client Id [1] Message: [null] Client Name [z] Status [connect]
+07/21/2024 20:01:15 [Project.client.ClientUI] ([34mFINE[0m):
+> Current panel: CHAT
+07/21/2024 20:01:15 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[ROOM_JOIN] Client Id [1] Message: [lobby] Client Name [z] Status [connect]
+07/21/2024 20:01:15 [Project.client.ClientUI] ([32mINFO[0m):
+> Current card: CHAT
+07/21/2024 20:01:15 [Project.client.Views.UserListPanel] ([32mINFO[0m):
+> Adding user to list: z (1)
+07/21/2024 20:01:17 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [1] Message: [yo]
+07/21/2024 20:01:21 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [1] Message: [<b>z (roll result): z rolled 2d6 and got 6</b>]
