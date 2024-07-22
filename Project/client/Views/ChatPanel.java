@@ -92,12 +92,12 @@ public class ChatPanel extends JPanel {
         });
 
         chatHistory = new JTextArea(); // jah89 07-20-2024
-        chatHistory.setEditable(false); // jah89 07-20-2024
-        JScrollPane chatScrollPane = new JScrollPane(chatHistory); // jah89 07-20-2024
+        chatHistory.setEditable(false); 
+        JScrollPane chatScrollPane = new JScrollPane(chatHistory); 
 
         JPanel input = new JPanel();
         input.setLayout(new BoxLayout(input, BoxLayout.X_AXIS));
-        input.setBorder(new EmptyBorder(5, 5, 5, 5)); // Add padding
+        input.setBorder(new EmptyBorder(5, 5, 5, 5)); A
 
         messageInput = new JTextField(); // jah89 07-20-2024
         input.add(messageInput); 
