@@ -34,12 +34,12 @@ public class ConnectionPanel extends JPanel {
         content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
         content.setBorder(new EmptyBorder(10, 10, 10, 10)); // Add padding
 
-        // Add username input field - jah89 07/19/2024
+        // Add username - jah89 07/19/2024
         JLabel userLabel = new JLabel("Username:");
         JTextField userValue = new JTextField();
         userValue.setToolTipText("Enter your username (no spaces)"); 
         JLabel userError = new JLabel();
-        userError.setVisible(false); // Initially hide the error label
+        userError.setVisible(false); 
         content.add(userLabel);
         content.add(userValue);
         content.add(userError);
@@ -83,15 +83,15 @@ public class ConnectionPanel extends JPanel {
                 username = userValue.getText().trim();
                 if (username.isEmpty() || username.contains(" ")) {
                     userError.setText("Invalid username, must not be empty or contain spaces");
-                    userError.setVisible(true); // Show error label if invalid
+                    userError.setVisible(true); 
                     isValid = false;
                 } else {
-                    userError.setVisible(false); // Hide error label if valid
+                    userError.setVisible(false); 
                 }
 
                 if (isValid) {
                     host = hostValue.getText();
-                    controls.next(); // Navigate to the next card
+                    controls.next(); 
                 }
             });
         });

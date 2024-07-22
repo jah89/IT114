@@ -24,14 +24,14 @@ public class UserDetailsPanel extends JPanel {
      * 
      * @param controls The card controls interface to handle navigation.
      */
-    public UserDetailsPanel(ICardControls controls) {  //jah89 
+    public UserDetailsPanel(ICardControls controls) {  //jah89 07-19-2024
         super(new BorderLayout(10, 10));
 
         JPanel content = new JPanel();
         content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
-        content.setBorder(new EmptyBorder(10, 10, 10, 10)); // Add padding
+        content.setBorder(new EmptyBorder(10, 10, 10, 10)); 
 
-        // Add username input field
+        // Add username input 
         JLabel userLabel = new JLabel("Username: ");
         JTextField userValue = new JTextField();
         JLabel userError = new JLabel();
@@ -42,7 +42,7 @@ public class UserDetailsPanel extends JPanel {
         content.add(userError);
         content.add(Box.createRigidArea(new Dimension(0, 200))); // Add vertical space
 
-        // Add Previous and Connect buttons
+        //Connect buttons
         JButton previousButton = new JButton("Previous");
         previousButton.addActionListener(event -> controls.previous());
         JButton connectButton = new JButton("Connect");
@@ -63,13 +63,13 @@ public class UserDetailsPanel extends JPanel {
         buttons.add(previousButton);
         buttons.add(connectButton);
 
-        content.add(Box.createVerticalGlue()); // Push buttons to the bottom
+        content.add(Box.createVerticalGlue()); 
         content.add(buttons);
 
-        // Add the content panel to the center of the BorderLayout
+        
         this.add(content, BorderLayout.CENTER);
 
-        // Add empty borders to the sides for spacing
+
         this.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         this.setName(CardView.USER_INFO.name());

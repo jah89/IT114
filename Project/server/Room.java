@@ -187,25 +187,28 @@ public class Room implements AutoCloseable {
      *                server-generated message
      */
     protected synchronized void sendMessage(ServerThread sender, String message) {
-        if (!isRunning) { // block action if Room isn't running
+        if (!isRunning) {    //jah89 07-22-2024 
             return;
         }
-        // JAH89 07-07-2024
+    
         message = processMessageFormatting(message);
-
-    long senderId = sender == null ? ServerThread.DEFAULT_CLIENT_ID : sender.getClientId();
-    final String finalMessage = message;
-
-    info(String.format("sending message to %s recipients: %s", getName(), clientsInRoom.size(), message));
-    clientsInRoom.values().removeIf(client -> {
-        boolean failedToSend = !client.sendMessage(senderId, finalMessage);
-        if (failedToSend) {
-            info(String.format("Removing disconnected client[%s] from list", client.getClientId()));
-            disconnect(client);
-        }
-        return failedToSend;
-    });
-}
+        long senderId = sender == null ? ServerThread.DEFAULT_CLIENT_ID : sender.getClientId();
+        final String finalMessage = message;
+    
+        info(String.format("sending message to %s recipients: %s", getName(), clientsInRoom.size(), message));
+        clientsInRoom.values().removeIf(client -> {
+            if (client.isClientMuted(senderId)) { //jah89 07-22-2024
+                info(String.format("Message from %s to %s avoided due to mute", senderId, client.getClientId()));
+                return false;
+            }
+            boolean failedToSend = !client.sendMessage(senderId, finalMessage);
+            if (failedToSend) {
+                info(String.format("Removing disconnected client[%s] from list", client.getClientId()));
+                disconnect(client);
+            }
+            return failedToSend;
+        });
+    }
 
 
     // end send data to client(s)
