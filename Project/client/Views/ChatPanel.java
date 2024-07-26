@@ -6,6 +6,7 @@ import Project.client.Interfaces.ICardControls;
 import Project.common.LoggerUtil;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -35,7 +36,6 @@ import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
-
 /**
  * ChatPanel represents the main chat interface where messages can be sent and
  * received.

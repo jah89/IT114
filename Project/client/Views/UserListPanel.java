@@ -100,7 +100,6 @@ public class UserListPanel extends JPanel {
 
             UserListItem userItem = new UserListItem(clientId, clientName, userListArea); 
 
-    
             GridBagConstraints gbc = new GridBagConstraints(); 
             gbc.gridx = 0; 
             gbc.gridy = userListArea.getComponentCount() - 1; 
@@ -109,7 +108,6 @@ public class UserListPanel extends JPanel {
             gbc.fill = GridBagConstraints.HORIZONTAL; 
             gbc.insets = new Insets(0, 0, 5, 0);
 
-         
             if (lastConstraints != null) { // jah89 07-20-2024
                 int index = userListArea.getComponentCount() - 1; 
                 if (index > -1) { 
@@ -118,7 +116,6 @@ public class UserListPanel extends JPanel {
             }
             userListArea.add(userItem, gbc); 
 
-        
             userListArea.add(Box.createVerticalGlue(), lastConstraints);
 
             userItemsMap.put(clientId, userItem); 
@@ -173,11 +170,37 @@ public class UserListPanel extends JPanel {
     }
 
     /**
-     * Gets a user list item by client ID.
+     * Updates the status of a user in the list.
+     *
      * @param clientId The ID of the client.
-     * @return The UserListItem corresponding to the client ID.
+     * @param isMuted  Whether the user is muted.
+     * @param isActive Whether the user is the last active user.
      */
-    public UserListItem getUserItem(long clientId) { // jah89 07-26-2024
+    public void updateUserStatus(long clientId, boolean isMuted, boolean isActive) { // jah89 07-26-2024
+        SwingUtilities.invokeLater(() -> {
+            UserListItem userItem = getUserItem(clientId);
+            if (userItem != null) {
+                if (isMuted) {
+                    userItem.setMuted(true);
+                } else {
+                    userItem.setMuted(false);
+                }
+                if (isActive) {
+                    userItem.setActive(true);
+                } else {
+                    userItem.setActive(false);
+                }
+            }
+        });
+    }
+
+    /**
+     * Retrieves a user item from the list.
+     *
+     * @param clientId The ID of the client.
+     * @return The UserListItem for the given client ID.
+     */
+    protected UserListItem getUserItem(long clientId) { // jah89 07-26-2024
         return userItemsMap.get(clientId);
     }
 }
