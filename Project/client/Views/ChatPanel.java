@@ -6,7 +6,6 @@ import Project.client.Interfaces.ICardControls;
 import Project.common.LoggerUtil;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -17,7 +16,11 @@ import java.awt.event.ContainerEvent;
 import java.awt.event.ContainerListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -44,6 +47,7 @@ public class ChatPanel extends JPanel {
     private JTextArea chatHistory; // jah89 07-20-2024
     private JTextField messageInput; // jah89 
     private JButton sendButton; // jah89 
+    private JButton exportButton; // jah89 07-26-2024
 
     /**
      * Constructor to create the ChatPanel UI.
@@ -97,7 +101,7 @@ public class ChatPanel extends JPanel {
 
         JPanel input = new JPanel();
         input.setLayout(new BoxLayout(input, BoxLayout.X_AXIS));
-        input.setBorder(new EmptyBorder(5, 5, 5, 5)); A
+        input.setBorder(new EmptyBorder(5, 5, 5, 5));
 
         messageInput = new JTextField(); // jah89 07-20-2024
         input.add(messageInput); 
@@ -124,6 +128,7 @@ public class ChatPanel extends JPanel {
                 try {
                     String text = messageInput.getText().trim(); //JAH89 07-20-2024
                     if (!text.isEmpty()) {
+                        long clientId = Client.INSTANCE.getClientId(); // Get the client ID - jah89 07-26-2024
                         if (text.startsWith("@")) {
                             int spaceIndex = text.indexOf(" ");
                             if (spaceIndex != -1) {
@@ -135,11 +140,13 @@ public class ChatPanel extends JPanel {
                                 } else {
                                     Client.INSTANCE.sendPrivateMessage(targetId, privateMessage);
                                     chatHistory.append("To " + targetName + ": " + privateMessage + "\n");
+                                    userListPanel.updateUserStatus(clientId, false, true); // jah89 07-26-2024
                                 }
                             }
                         } else {
                             Client.INSTANCE.sendMessage(text);
                             chatHistory.append("Me: " + text + "\n");
+                            userListPanel.updateUserStatus(clientId, false, true); // jah89 07-26-2024
                         }
                         messageInput.setText(""); // Clear the original text
                     }
@@ -150,6 +157,19 @@ public class ChatPanel extends JPanel {
         });
 
         input.add(sendButton); // jah89 07-20-2024
+
+        exportButton = new JButton("Export Chat");
+        exportButton.addActionListener((event) -> {  // jah89 07-26-2024
+            SwingUtilities.invokeLater(() -> {
+                try {
+                    exportChatHistory();
+                } catch (IOException e) {
+                    LoggerUtil.INSTANCE.severe("Error exporting chat history", e);
+                }
+            });
+        });
+
+        input.add(exportButton); // jah89 07-26-2024
 
         this.add(splitPane, BorderLayout.CENTER);
         this.add(input, BorderLayout.SOUTH);
@@ -188,38 +208,41 @@ public class ChatPanel extends JPanel {
         chatArea.add(Box.createVerticalGlue(), gbc);
     }
 
-    /**
-     * Adds a user to the user list.
-     * 
-     * @param clientId   The ID of the client.
-     * @param clientName The name of the client.
-     */
-    public void addUserListItem(long clientId, String clientName) {
-        SwingUtilities.invokeLater(() -> userListPanel.addUserListItem(clientId, clientName));
+    private void exportChatHistory() throws IOException { // jah89 07-24-2024
+        StringBuilder chatContent = new StringBuilder();
+        chatContent.append(chatHistory.getText());  
+
+        // Generate unique filename using current date and time
+        String fileName = String.format("chat_history_%s.txt", new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()));
+
+        // Write content to file
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+            writer.write(chatContent.toString());
+        }
+
+        // Inform user about successful export
+        chatHistory.append("Chat history exported to " + fileName + "\n");
     }
 
-    /**
-     * Removes a user from the user list.
-     * 
-     * @param clientId The ID of the client to be removed.
-     */
-    public void removeUserListItem(long clientId) {
-        SwingUtilities.invokeLater(() -> userListPanel.removeUserListItem(clientId));
+    public void updateUserStatus(long clientId, boolean isMuted, boolean isActive) { // jah89 07-26-2024
+        SwingUtilities.invokeLater(() -> {
+            UserListItem userItem = userListPanel.getUserItem(clientId);
+            if (userItem != null) {
+                if (isMuted) {
+                    userItem.setMuted(true);
+                } else {
+                    userItem.setMuted(false);
+                }
+                if (isActive) {
+                    userItem.setActive(true);
+                } else {
+                    userItem.setActive(false);
+                }
+            }
+        });
     }
 
-    /**
-     * Clears the user list.
-     */
-    public void clearUserList() {
-        SwingUtilities.invokeLater(() -> userListPanel.clearUserList());
-    }
-
-    /**
-     * Adds a message to the chat area.
-     * 
-     * @param text The text of the message.
-     */
-    public void addText(String text) {
+    public void addText(String text) { // jah89 07-26-2024
         SwingUtilities.invokeLater(() -> {
             JEditorPane textContainer = new JEditorPane("text/plain", text);
             textContainer.setEditable(false);

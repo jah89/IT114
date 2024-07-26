@@ -243,20 +243,37 @@ public class ServerThread extends BaseServerThread {
         return send(cp);
     }
 
-    // Methods to manage muted clients - jah89 07-20-2024
+    // jah89 07-20-2024
     private Set<Long> mutedClients = new HashSet<>();
 
     public void addMutedClient(long clientId) {
-        mutedClients.add(clientId);
+        if (mutedClients.add(clientId)) { 
+            saveMuteList(clientName); 
+            ServerThread target = currentRoom.getClient(clientId);
+            if (target != null) {
+                target.sendMessage(clientName + " muted you.");
+            }
+        }
     }
 
-    public void removeMutedClient(long clientId) {
-        mutedClients.remove(clientId);
+    public void removeMutedClient(long clientId) { // jah89 07-26-2024
+        if (mutedClients.remove(clientId)) { 
+            saveMuteList(clientName); 
+            ServerThread target = currentRoom.getClient(clientId);
+            if (target != null) {
+                target.sendMessage(clientName + " unmuted you.");
+            }
+        }
     }
 
     public boolean isClientMuted(long clientId) {
         return mutedClients.contains(clientId);
     }
 
-    // end send methods
+ 
+
+    //jah89 07-26-2024
+    private void saveMuteList(String clientName) {
+      
+    }
 }

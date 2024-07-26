@@ -64,6 +64,7 @@ public enum Client {
     private final String LOGOFF = "logoff";
     private final String LOGOUT = "logout";
     private final String SINGLE_SPACE = " ";
+    private long clientId;
 
     // callback that updates the UI
     private static IClientEvents events;
@@ -83,6 +84,9 @@ public enum Client {
         // don't really help determine if the server had a problem
         // and is just for lesson's sake
         return server.isConnected() && !server.isClosed() && !server.isInputShutdown() && !server.isOutputShutdown();
+    }
+    public long getClientId() {
+        return clientId;
     }
 
     /**

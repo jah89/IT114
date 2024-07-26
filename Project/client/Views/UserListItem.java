@@ -51,4 +51,20 @@ public class UserListItem extends JPanel {
     public String getClientName() {
         return textContainer.getText();
     }
+
+    public void setMuted(boolean isMuted) { // jah89 07-26-2024
+        if (isMuted) {
+            textContainer.setForeground(Color.GRAY);
+        } else {
+            textContainer.setForeground(Color.BLACK);
+        }
+    }
+
+    public void setActive(boolean isActive) { // jah89 07-26-2024
+        if (isActive) {
+            this.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+        } else {
+            this.setBorder(BorderFactory.createEmptyBorder());
+        }
+    }
 }
