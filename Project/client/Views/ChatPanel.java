@@ -36,6 +36,7 @@ import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
+
 /**
  * ChatPanel represents the main chat interface where messages can be sent and
  * received.
@@ -280,5 +281,18 @@ public class ChatPanel extends JPanel {
                 vertical.setValue(vertical.getMaximum());
             });
         });
+    }
+
+    // Add methods to manage user list items
+    public void removeUserListItem(long clientId) { // jah89 07-26-2024
+        userListPanel.removeUserListItem(clientId);
+    }
+
+    public void clearUserList() { // jah89 07-26-2024
+        userListPanel.clearUserList();
+    }
+
+    public void addUserListItem(long clientId, String clientName) { // jah89 07-26-2024
+        userListPanel.addUserListItem(clientId, clientName);
     }
 }
