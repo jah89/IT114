@@ -253,18 +253,32 @@ public class ServerThread extends BaseServerThread {
             if (target != null) {
                 target.sendMessage(clientName + " muted you.");
             }
+            // Send mute status update to the client
+            sendMuteStatusUpdate(clientId, true); // jah89 07-27-2024
         }
     }
-
-    public void removeMutedClient(long clientId) { // jah89 07-26-2024
+    
+    public void removeMutedClient(long clientId) { 
         if (mutedClients.remove(clientId)) { 
             saveMuteList(clientName); 
             ServerThread target = currentRoom.getClient(clientId);
             if (target != null) {
                 target.sendMessage(clientName + " unmuted you.");
             }
+            // Send mute status update to the client
+            sendMuteStatusUpdate(clientId, false); // jah89 07-27-2024
         }
     }
+    
+    // Method to send mute status update to the client
+    private void sendMuteStatusUpdate(long clientId, boolean isMuted) { // jah89 07-27-2024
+        Payload p = new Payload();
+        p.setClientId(clientId);
+        p.setMessage(isMuted ? "MUTED" : "UNMUTED");
+        p.setPayloadType(PayloadType.MUTE_STATUS);
+        send(p);
+    }
+    
 
     public boolean isClientMuted(long clientId) {
         return mutedClients.contains(clientId);

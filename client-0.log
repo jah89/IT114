@@ -1522,3 +1522,470 @@
 > Closed socket
 07/26/2024 19:42:55 [Project.client.Client] ([32mINFO[0m):
 > listenToServer thread stopped
+07/26/2024 19:59:04 [Project.client.Client] ([31mSEVERE[0m):
+> Socket send exception
+	at java.base/sun.nio.ch.NioSocketImpl.ensureOpenAndConnected(NioSocketImpl.java:163)
+	at java.base/sun.nio.ch.NioSocketImpl.beginWrite(NioSocketImpl.java:362)
+	at java.base/sun.nio.ch.NioSocketImpl.implWrite(NioSocketImpl.java:407)
+	at java.base/sun.nio.ch.NioSocketImpl.write(NioSocketImpl.java:440)
+	at java.base/sun.nio.ch.NioSocketImpl$2.write(NioSocketImpl.java:819)
+	at java.base/java.net.Socket$SocketOutputStream.implWrite(Socket.java:1223)
+	at java.base/java.net.Socket$SocketOutputStream.write(Socket.java:1210)
+	at java.base/java.io.ObjectOutputStream$BlockDataOutputStream.drain(ObjectOutputStream.java:1899)
+	at java.base/java.io.ObjectOutputStream$BlockDataOutputStream.setBlockDataMode(ObjectOutputStream.java:1808)
+	at java.base/java.io.ObjectOutputStream.writeNonProxyDesc(ObjectOutputStream.java:1302)
+	at java.base/java.io.ObjectOutputStream.writeClassDesc(ObjectOutputStream.java:1247)
+	at java.base/java.io.ObjectOutputStream.writeOrdinaryObject(ObjectOutputStream.java:1443)
+	at java.base/java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1194)
+	at java.base/java.io.ObjectOutputStream.writeFatalException(ObjectOutputStream.java:1615)
+	at java.base/java.io.ObjectOutputStream.writeObject(ObjectOutputStream.java:361)
+	at Project.client.Client.send(Client.java:360)
+	at Project.client.Client.sendDisconnect(Client.java:318)
+	at Project.client.ClientUI$2.windowClosing(ClientUI.java:104)
+	at java.desktop/java.awt.Window.processWindowEvent(Window.java:2085)
+	at java.desktop/javax.swing.JFrame.processWindowEvent(JFrame.java:298)
+	at java.desktop/java.awt.Window.processEvent(Window.java:2044)
+	at java.desktop/java.awt.Component.dispatchEventImpl(Component.java:4996)
+	at java.desktop/java.awt.Container.dispatchEventImpl(Container.java:2324)
+	at java.desktop/java.awt.Window.dispatchEventImpl(Window.java:2780)
+	at java.desktop/java.awt.Component.dispatchEvent(Component.java:4828)
+	at java.desktop/java.awt.EventQueue.dispatchEventImpl(EventQueue.java:775)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:720)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:714)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:87)
+	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:98)
+	at java.desktop/java.awt.EventQueue$5.run(EventQueue.java:747)
+	at java.desktop/java.awt.EventQueue$5.run(EventQueue.java:745)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:87)
+	at java.desktop/java.awt.EventQueue.dispatchEvent(EventQueue.java:744)
+	at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.desktop/java.awt.EventDispatchThread.run(EventDispatchThread.java:90)
+
+07/26/2024 19:59:04 [Project.client.ClientUI$2] ([31mSEVERE[0m):
+> Error during disconnect: Socket closed
+07/26/2024 19:59:22 [Project.client.Client] ([32mINFO[0m):
+> Client Created
+07/26/2024 19:59:22 [Project.client.ClientUI] ([34mFINE[0m):
+> Current panel: USER_INFO
+07/26/2024 19:59:23 [Project.client.Views.UserDetailsPanel] ([32mINFO[0m):
+> Chosen username: z
+07/26/2024 19:59:23 [Project.client.Client] ([32mINFO[0m):
+> Client connected
+07/26/2024 19:59:23 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[CLIENT_ID] Client Id [1] Message: [null] Client Name [z] Status [connect]
+07/26/2024 19:59:23 [Project.client.ClientUI] ([34mFINE[0m):
+> Current panel: CHAT
+07/26/2024 19:59:23 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[ROOM_JOIN] Client Id [1] Message: [lobby] Client Name [z] Status [connect]
+07/26/2024 19:59:23 [Project.client.ClientUI] ([32mINFO[0m):
+> Current card: CHAT
+07/26/2024 19:59:23 [Project.client.Views.UserListPanel] ([32mINFO[0m):
+> Adding user to list: z (1)
+07/26/2024 19:59:26 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[ROOM_JOIN] Client Id [2] Message: [lobby] Client Name [zz] Status [connect]
+07/26/2024 19:59:26 [Project.client.ClientUI] ([32mINFO[0m):
+> Current card: CHAT
+07/26/2024 19:59:26 [Project.client.Views.UserListPanel] ([32mINFO[0m):
+> Adding user to list: zz (2)
+07/26/2024 19:59:27 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [2] Message: [yp]
+07/26/2024 19:59:29 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [1] Message: [ki]
+07/26/2024 19:59:31 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [-1] Message: [zz muted you.]
+07/26/2024 20:07:48 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[DISCONNECT] Client Id [1] Message: [null] Client Name [z] Status [disconnect]
+07/26/2024 20:07:48 [Project.client.ClientUI] ([32mINFO[0m):
+> I disconnected
+07/26/2024 20:07:48 [Project.client.ClientUI] ([34mFINE[0m):
+> Current panel: USER_INFO
+07/26/2024 20:07:48 [Project.client.Client] ([32mINFO[0m):
+> Closing output stream
+07/26/2024 20:07:48 [Project.client.Views.UserListPanel] ([32mINFO[0m):
+> Removing user list item for id 1
+07/26/2024 20:07:48 [Project.client.Client] ([32mINFO[0m):
+> Closing input stream
+07/26/2024 20:07:48 [Project.client.Client] ([32mINFO[0m):
+> Closing connection
+07/26/2024 20:07:48 [Project.client.Client] ([32mINFO[0m):
+> Closed socket
+07/26/2024 20:07:48 [Project.client.Client] ([32mINFO[0m):
+> Closing output stream
+07/26/2024 20:07:48 [Project.client.Client] ([32mINFO[0m):
+> Closing input stream
+07/26/2024 20:07:48 [Project.client.Client] ([32mINFO[0m):
+> Closing connection
+07/26/2024 20:07:48 [Project.client.Client] ([32mINFO[0m):
+> Closed socket
+07/26/2024 20:07:48 [Project.client.Client] ([32mINFO[0m):
+> listenToServer thread stopped
+07/26/2024 20:08:09 [Project.client.Client] ([32mINFO[0m):
+> Client Created
+07/26/2024 20:08:09 [Project.client.ClientUI] ([34mFINE[0m):
+> Current panel: USER_INFO
+07/26/2024 20:08:11 [Project.client.Views.UserDetailsPanel] ([32mINFO[0m):
+> Chosen username: zz
+07/26/2024 20:08:11 [Project.client.Client] ([32mINFO[0m):
+> Client connected
+07/26/2024 20:08:11 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[CLIENT_ID] Client Id [1] Message: [null] Client Name [zz] Status [connect]
+07/26/2024 20:08:11 [Project.client.ClientUI] ([34mFINE[0m):
+> Current panel: CHAT
+07/26/2024 20:08:11 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[ROOM_JOIN] Client Id [1] Message: [lobby] Client Name [zz] Status [connect]
+07/26/2024 20:08:11 [Project.client.ClientUI] ([32mINFO[0m):
+> Current card: CHAT
+07/26/2024 20:08:11 [Project.client.Views.UserListPanel] ([32mINFO[0m):
+> Adding user to list: zz (1)
+07/26/2024 20:08:13 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[ROOM_JOIN] Client Id [2] Message: [lobby] Client Name [a] Status [connect]
+07/26/2024 20:08:13 [Project.client.ClientUI] ([32mINFO[0m):
+> Current card: CHAT
+07/26/2024 20:08:13 [Project.client.Views.UserListPanel] ([32mINFO[0m):
+> Adding user to list: a (2)
+07/26/2024 20:08:15 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [2] Message: [yo]
+07/26/2024 20:08:16 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [1] Message: [yo]
+07/26/2024 20:08:19 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [-1] Message: [a muted you.]
+07/27/2024 06:58:37 [Project.client.Client] ([32mINFO[0m):
+> Client Created
+07/27/2024 06:58:37 [Project.client.ClientUI] ([34mFINE[0m):
+> Current panel: USER_INFO
+07/27/2024 06:58:43 [Project.client.Views.UserDetailsPanel] ([32mINFO[0m):
+> Chosen username: fred
+07/27/2024 06:58:43 [Project.client.Client] ([32mINFO[0m):
+> Client connected
+07/27/2024 06:58:43 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[CLIENT_ID] Client Id [2] Message: [null] Client Name [fred] Status [connect]
+07/27/2024 06:58:43 [Project.client.ClientUI] ([34mFINE[0m):
+> Current panel: CHAT
+07/27/2024 06:58:43 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[ROOM_JOIN] Client Id [2] Message: [lobby] Client Name [fred] Status [connect]
+07/27/2024 06:58:43 [Project.client.ClientUI] ([32mINFO[0m):
+> Current card: CHAT
+07/27/2024 06:58:43 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[SYNC_CLIENT] Client Id [1] Message: [null] Client Name [teddy] Status [connect]
+07/27/2024 06:58:43 [Project.client.Views.UserListPanel] ([32mINFO[0m):
+> Adding user to list: fred (2)
+07/27/2024 06:58:43 [Project.client.Views.UserListPanel] ([32mINFO[0m):
+> Adding user to list: teddy (1)
+07/27/2024 06:58:45 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [2] Message: [hey]
+07/27/2024 06:58:48 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [1] Message: [wasuup]
+07/27/2024 06:59:11 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [-1] Message: [teddy has been muted.]
+07/27/2024 07:11:10 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[DISCONNECT] Client Id [1] Message: [null] Client Name [teddy] Status [disconnect]
+07/27/2024 07:11:10 [Project.client.ClientUI] ([32mINFO[0m):
+> Current card: CHAT
+07/27/2024 07:11:10 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[DISCONNECT] Client Id [2] Message: [null] Client Name [fred] Status [disconnect]
+07/27/2024 07:11:10 [Project.client.Views.UserListPanel] ([32mINFO[0m):
+> Removing user list item for id 1
+07/27/2024 07:11:10 [Project.client.ClientUI] ([32mINFO[0m):
+> I disconnected
+07/27/2024 07:11:10 [Project.client.ClientUI] ([34mFINE[0m):
+> Current panel: USER_INFO
+07/27/2024 07:11:10 [Project.client.Client] ([32mINFO[0m):
+> Closing output stream
+07/27/2024 07:11:10 [Project.client.Client] ([32mINFO[0m):
+> Closing input stream
+07/27/2024 07:11:10 [Project.client.Views.UserListPanel] ([32mINFO[0m):
+> Removing user list item for id 1
+07/27/2024 07:11:10 [Project.client.Client] ([32mINFO[0m):
+> Closing connection
+07/27/2024 07:11:10 [Project.client.Views.UserListPanel] ([32mINFO[0m):
+> Removing user list item for id 2
+07/27/2024 07:11:10 [Project.client.Client] ([32mINFO[0m):
+> Closed socket
+07/27/2024 07:11:10 [Project.client.Client] ([32mINFO[0m):
+> Closing output stream
+07/27/2024 07:11:10 [Project.client.Client] ([32mINFO[0m):
+> Closing input stream
+07/27/2024 07:11:10 [Project.client.Client] ([32mINFO[0m):
+> Closing connection
+07/27/2024 07:11:10 [Project.client.Client] ([32mINFO[0m):
+> Closed socket
+07/27/2024 07:11:10 [Project.client.Client] ([32mINFO[0m):
+> listenToServer thread stopped
+07/27/2024 07:11:48 [Project.client.Client] ([32mINFO[0m):
+> Client Created
+07/27/2024 07:11:48 [Project.client.ClientUI] ([34mFINE[0m):
+> Current panel: USER_INFO
+07/27/2024 07:11:49 [Project.client.Views.UserDetailsPanel] ([32mINFO[0m):
+> Chosen username: b
+07/27/2024 07:11:49 [Project.client.Client] ([32mINFO[0m):
+> Client connected
+07/27/2024 07:11:49 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[CLIENT_ID] Client Id [2] Message: [null] Client Name [b] Status [connect]
+07/27/2024 07:11:49 [Project.client.ClientUI] ([34mFINE[0m):
+> Current panel: CHAT
+07/27/2024 07:11:49 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[ROOM_JOIN] Client Id [2] Message: [lobby] Client Name [b] Status [connect]
+07/27/2024 07:11:49 [Project.client.ClientUI] ([32mINFO[0m):
+> Current card: CHAT
+07/27/2024 07:11:49 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[SYNC_CLIENT] Client Id [1] Message: [null] Client Name [a] Status [connect]
+07/27/2024 07:11:53 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [1] Message: [yoo]
+07/27/2024 07:11:57 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [2] Message: [wassup]
+07/27/2024 07:12:00 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [-1] Message: [a has been muted.]
+07/27/2024 07:23:10 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[DISCONNECT] Client Id [1] Message: [null] Client Name [a] Status [disconnect]
+07/27/2024 07:23:10 [Project.client.ClientUI] ([32mINFO[0m):
+> Current card: CHAT
+07/27/2024 07:23:10 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[DISCONNECT] Client Id [2] Message: [null] Client Name [b] Status [disconnect]
+07/27/2024 07:23:10 [Project.client.ClientUI] ([32mINFO[0m):
+> I disconnected
+07/27/2024 07:23:10 [Project.client.ClientUI] ([34mFINE[0m):
+> Current panel: USER_INFO
+07/27/2024 07:23:10 [Project.client.Client] ([32mINFO[0m):
+> Closing output stream
+07/27/2024 07:23:10 [Project.client.Client] ([32mINFO[0m):
+> Closing input stream
+07/27/2024 07:23:10 [Project.client.Client] ([32mINFO[0m):
+> Closing connection
+07/27/2024 07:23:10 [Project.client.Client] ([32mINFO[0m):
+> Closed socket
+07/27/2024 07:23:10 [Project.client.Client] ([32mINFO[0m):
+> Closing output stream
+07/27/2024 07:23:10 [Project.client.Client] ([32mINFO[0m):
+> Closing input stream
+07/27/2024 07:23:10 [Project.client.Client] ([32mINFO[0m):
+> Closing connection
+07/27/2024 07:23:10 [Project.client.Client] ([32mINFO[0m):
+> Closed socket
+07/27/2024 07:23:10 [Project.client.Client] ([32mINFO[0m):
+> listenToServer thread stopped
+07/27/2024 07:23:29 [Project.client.Client] ([32mINFO[0m):
+> Client Created
+07/27/2024 07:23:29 [Project.client.ClientUI] ([34mFINE[0m):
+> Current panel: USER_INFO
+07/27/2024 07:23:30 [Project.client.Views.UserDetailsPanel] ([32mINFO[0m):
+> Chosen username: z
+07/27/2024 07:23:30 [Project.client.Client] ([32mINFO[0m):
+> Client connected
+07/27/2024 07:23:30 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[CLIENT_ID] Client Id [1] Message: [null] Client Name [z] Status [connect]
+07/27/2024 07:23:30 [Project.client.ClientUI] ([34mFINE[0m):
+> Current panel: CHAT
+07/27/2024 07:23:30 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[ROOM_JOIN] Client Id [1] Message: [lobby] Client Name [z] Status [connect]
+07/27/2024 07:23:30 [Project.client.ClientUI] ([32mINFO[0m):
+> Current card: CHAT
+07/27/2024 07:23:30 [Project.client.Views.UserListPanel] ([32mINFO[0m):
+> Adding user to list: z (1)
+07/27/2024 07:23:34 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[ROOM_JOIN] Client Id [2] Message: [lobby] Client Name [zz] Status [connect]
+07/27/2024 07:23:34 [Project.client.ClientUI] ([32mINFO[0m):
+> Current card: CHAT
+07/27/2024 07:23:34 [Project.client.Views.UserListPanel] ([32mINFO[0m):
+> Adding user to list: zz (2)
+07/27/2024 07:23:36 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [2] Message: [hi]
+07/27/2024 07:23:40 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [1] Message: [hi]
+07/27/2024 07:23:46 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [-1] Message: [zz has been muted.]
+07/27/2024 07:23:52 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [1] Message: [hgghg]
+07/27/2024 07:26:24 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[DISCONNECT] Client Id [1] Message: [null] Client Name [z] Status [disconnect]
+07/27/2024 07:26:24 [Project.client.ClientUI] ([32mINFO[0m):
+> I disconnected
+07/27/2024 07:26:24 [Project.client.ClientUI] ([34mFINE[0m):
+> Current panel: USER_INFO
+07/27/2024 07:26:24 [Project.client.Views.UserListPanel] ([32mINFO[0m):
+> Removing user list item for id 1
+07/27/2024 07:26:24 [Project.client.Client] ([32mINFO[0m):
+> Closing output stream
+07/27/2024 07:26:24 [Project.client.Client] ([32mINFO[0m):
+> Closing input stream
+07/27/2024 07:26:24 [Project.client.Client] ([32mINFO[0m):
+> Closing connection
+07/27/2024 07:26:24 [Project.client.Client] ([32mINFO[0m):
+> Closed socket
+07/27/2024 07:26:24 [Project.client.Client] ([32mINFO[0m):
+> Closing output stream
+07/27/2024 07:26:24 [Project.client.Client] ([32mINFO[0m):
+> Closing input stream
+07/27/2024 07:26:24 [Project.client.Client] ([32mINFO[0m):
+> Closing connection
+07/27/2024 07:26:24 [Project.client.Client] ([32mINFO[0m):
+> Closed socket
+07/27/2024 07:26:24 [Project.client.Client] ([32mINFO[0m):
+> listenToServer thread stopped
+07/27/2024 07:26:45 [Project.client.Client] ([32mINFO[0m):
+> Client Created
+07/27/2024 07:26:45 [Project.client.ClientUI] ([34mFINE[0m):
+> Current panel: USER_INFO
+07/27/2024 07:26:46 [Project.client.Views.UserDetailsPanel] ([32mINFO[0m):
+> Chosen username: zz
+07/27/2024 07:26:46 [Project.client.Client] ([32mINFO[0m):
+> Client connected
+07/27/2024 07:26:46 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[CLIENT_ID] Client Id [2] Message: [null] Client Name [zz] Status [connect]
+07/27/2024 07:26:46 [Project.client.ClientUI] ([34mFINE[0m):
+> Current panel: CHAT
+07/27/2024 07:26:46 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[ROOM_JOIN] Client Id [2] Message: [lobby] Client Name [zz] Status [connect]
+07/27/2024 07:26:46 [Project.client.ClientUI] ([32mINFO[0m):
+> Current card: CHAT
+07/27/2024 07:26:46 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[SYNC_CLIENT] Client Id [1] Message: [null] Client Name [z] Status [connect]
+07/27/2024 07:26:46 [Project.client.Views.UserListPanel] ([32mINFO[0m):
+> Adding user to list: zz (2)
+07/27/2024 07:26:46 [Project.client.Views.UserListPanel] ([32mINFO[0m):
+> Adding user to list: z (1)
+07/27/2024 07:26:48 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [2] Message: [hi]
+07/27/2024 07:26:50 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [1] Message: [hi]
+07/27/2024 07:26:53 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [-1] Message: [z has been muted.]
+07/27/2024 07:27:00 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [2] Message: [dd]
+07/27/2024 07:32:56 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[DISCONNECT] Client Id [1] Message: [null] Client Name [z] Status [disconnect]
+07/27/2024 07:32:56 [Project.client.ClientUI] ([32mINFO[0m):
+> Current card: CHAT
+07/27/2024 07:32:56 [Project.client.Views.UserListPanel] ([32mINFO[0m):
+> Removing user list item for id 1
+07/27/2024 07:32:56 [Project.client.Views.UserListPanel] ([32mINFO[0m):
+> Removing user list item for id 1
+07/27/2024 07:40:49 [Project.client.Client] ([32mINFO[0m):
+> Client Created
+07/27/2024 07:40:49 [Project.client.ClientUI] ([34mFINE[0m):
+> Current panel: USER_INFO
+07/27/2024 07:40:50 [Project.client.Views.UserDetailsPanel] ([32mINFO[0m):
+> Chosen username: z
+07/27/2024 07:40:50 [Project.client.Client] ([32mINFO[0m):
+> Client connected
+07/27/2024 07:40:50 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[CLIENT_ID] Client Id [2] Message: [null] Client Name [z] Status [connect]
+07/27/2024 07:40:50 [Project.client.ClientUI] ([34mFINE[0m):
+> Current panel: CHAT
+07/27/2024 07:40:50 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[ROOM_JOIN] Client Id [2] Message: [lobby] Client Name [z] Status [connect]
+07/27/2024 07:40:50 [Project.client.ClientUI] ([32mINFO[0m):
+> Current card: CHAT
+07/27/2024 07:40:50 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[SYNC_CLIENT] Client Id [1] Message: [null] Client Name [zzz] Status [connect]
+07/27/2024 07:40:50 [Project.client.Views.UserListPanel] ([32mINFO[0m):
+> Adding user to list: z (2)
+07/27/2024 07:40:50 [Project.client.Views.UserListPanel] ([32mINFO[0m):
+> Adding user to list: zzz (1)
+07/27/2024 07:40:52 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [2] Message: [hi]
+07/27/2024 07:40:54 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [1] Message: [hryu]
+07/27/2024 07:40:59 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [-1] Message: [zzz has been muted.]
+07/27/2024 07:41:07 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [2] Message: [ghjjgh]
+07/27/2024 07:54:58 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[DISCONNECT] Client Id [1] Message: [null] Client Name [zzz] Status [disconnect]
+07/27/2024 07:54:58 [Project.client.ClientUI] ([32mINFO[0m):
+> Current card: CHAT
+07/27/2024 07:54:58 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[DISCONNECT] Client Id [2] Message: [null] Client Name [z] Status [disconnect]
+07/27/2024 07:54:58 [Project.client.Views.UserListPanel] ([32mINFO[0m):
+> Removing user list item for id 1
+07/27/2024 07:54:58 [Project.client.ClientUI] ([32mINFO[0m):
+> I disconnected
+07/27/2024 07:54:58 [Project.client.ClientUI] ([34mFINE[0m):
+> Current panel: USER_INFO
+07/27/2024 07:54:58 [Project.client.Client] ([32mINFO[0m):
+> Closing output stream
+07/27/2024 07:54:58 [Project.client.Client] ([32mINFO[0m):
+> Closing input stream
+07/27/2024 07:54:58 [Project.client.Views.UserListPanel] ([32mINFO[0m):
+> Removing user list item for id 1
+07/27/2024 07:54:58 [Project.client.Client] ([32mINFO[0m):
+> Closing connection
+07/27/2024 07:54:58 [Project.client.Views.UserListPanel] ([32mINFO[0m):
+> Removing user list item for id 2
+07/27/2024 07:54:58 [Project.client.Client] ([32mINFO[0m):
+> Closed socket
+07/27/2024 07:54:58 [Project.client.Client] ([32mINFO[0m):
+> Closing output stream
+07/27/2024 07:54:58 [Project.client.Client] ([32mINFO[0m):
+> Closing input stream
+07/27/2024 07:54:58 [Project.client.Client] ([32mINFO[0m):
+> Closing connection
+07/27/2024 07:54:58 [Project.client.Client] ([32mINFO[0m):
+> Closed socket
+07/27/2024 07:54:58 [Project.client.Client] ([32mINFO[0m):
+> listenToServer thread stopped
+07/27/2024 07:55:39 [Project.client.Client] ([32mINFO[0m):
+> Client Created
+07/27/2024 07:55:39 [Project.client.ClientUI] ([34mFINE[0m):
+> Current panel: USER_INFO
+07/27/2024 07:55:40 [Project.client.Views.UserDetailsPanel] ([32mINFO[0m):
+> Chosen username: z
+07/27/2024 07:55:40 [Project.client.Client] ([32mINFO[0m):
+> Client connected
+07/27/2024 07:55:40 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[CLIENT_ID] Client Id [2] Message: [null] Client Name [z] Status [connect]
+07/27/2024 07:55:40 [Project.client.ClientUI] ([34mFINE[0m):
+> Current panel: CHAT
+07/27/2024 07:55:40 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[ROOM_JOIN] Client Id [2] Message: [lobby] Client Name [z] Status [connect]
+07/27/2024 07:55:40 [Project.client.ClientUI] ([32mINFO[0m):
+> Current card: CHAT
+07/27/2024 07:55:40 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[SYNC_CLIENT] Client Id [1] Message: [null] Client Name [z] Status [connect]
+07/27/2024 07:55:40 [Project.client.Views.UserListPanel] ([32mINFO[0m):
+> Adding user to list: z (2)
+07/27/2024 07:55:40 [Project.client.Views.UserListPanel] ([32mINFO[0m):
+> Adding user to list: z (1)
+07/27/2024 07:55:43 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MUTE_STATUS] Client Id [1] Message: [MUTED]
+07/27/2024 07:55:43 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[MESSAGE] Client Id [-1] Message: [z has been muted.]
+07/27/2024 07:55:51 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[DISCONNECT] Client Id [1] Message: [null] Client Name [z] Status [disconnect]
+07/27/2024 07:55:51 [Project.client.ClientUI] ([32mINFO[0m):
+> Current card: CHAT
+07/27/2024 07:55:51 [Project.client.Client] ([32mINFO[0m):
+> Received Payload: Payload[DISCONNECT] Client Id [2] Message: [null] Client Name [z] Status [disconnect]
+07/27/2024 07:55:51 [Project.client.Views.UserListPanel] ([32mINFO[0m):
+> Removing user list item for id 1
+07/27/2024 07:55:51 [Project.client.ClientUI] ([32mINFO[0m):
+> I disconnected
+07/27/2024 07:55:51 [Project.client.ClientUI] ([34mFINE[0m):
+> Current panel: USER_INFO
+07/27/2024 07:55:51 [Project.client.Client] ([32mINFO[0m):
+> Closing output stream
+07/27/2024 07:55:51 [Project.client.Client] ([32mINFO[0m):
+> Closing input stream
+07/27/2024 07:55:51 [Project.client.Views.UserListPanel] ([32mINFO[0m):
+> Removing user list item for id 1
+07/27/2024 07:55:51 [Project.client.Client] ([32mINFO[0m):
+> Closing connection
+07/27/2024 07:55:51 [Project.client.Views.UserListPanel] ([32mINFO[0m):
+> Removing user list item for id 2
+07/27/2024 07:55:51 [Project.client.Client] ([32mINFO[0m):
+> Closed socket
+07/27/2024 07:55:51 [Project.client.Client] ([32mINFO[0m):
+> Closing output stream
+07/27/2024 07:55:51 [Project.client.Client] ([32mINFO[0m):
+> Closing input stream
+07/27/2024 07:55:51 [Project.client.Client] ([32mINFO[0m):
+> Closing connection
+07/27/2024 07:55:51 [Project.client.Client] ([32mINFO[0m):
+> Closed socket
+07/27/2024 07:55:51 [Project.client.Client] ([32mINFO[0m):
+> listenToServer thread stopped

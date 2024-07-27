@@ -13,5 +13,6 @@ public enum PayloadType {
     FLIP,
     MUTE, //jah89 07-20-2024
     UNMUTE,
-    PRIVATE_MESSAGE //jah89 07-20-2024
+    PRIVATE_MESSAGE,
+    MUTE_STATUS //jah89 07-20-2024
 }

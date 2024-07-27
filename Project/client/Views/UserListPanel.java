@@ -84,10 +84,24 @@ public class UserListPanel extends JPanel {
     }
 
     /**
+     * Adjusts the width of all user list items. // jah89 07-20-2024
+     */
+    private void adjustUserListItemsWidth() { 
+        SwingUtilities.invokeLater(() -> { 
+            for (UserListItem item : userItemsMap.values()) { 
+                item.setPreferredSize( 
+                        new Dimension(userListArea.getWidth() - 20, item.getPreferredSize().height));
+            }
+            userListArea.revalidate();
+            userListArea.repaint(); 
+        }); 
+    }
+
+    /**
      * Adds a user to the list.
      *
-     * @param clientId   The ID of the client. 
-     * @param clientName The name of the client. 
+     * @param clientId   The ID of the client.
+     * @param clientName The name of the client.
      */
     protected void addUserListItem(long clientId, String clientName) { // jah89 07-20-2024
         SwingUtilities.invokeLater(() -> { 
@@ -115,32 +129,15 @@ public class UserListPanel extends JPanel {
                 }
             }
             userListArea.add(userItem, gbc); 
-
             userListArea.add(Box.createVerticalGlue(), lastConstraints);
-
             userItemsMap.put(clientId, userItem); 
-
             userListArea.revalidate(); 
             userListArea.repaint(); 
         }); 
     }
 
     /**
-     * Adjusts the width of all user list items. // jah89 07-20-2024
-     */
-    private void adjustUserListItemsWidth() { 
-        SwingUtilities.invokeLater(() -> { 
-            for (UserListItem item : userItemsMap.values()) { 
-                item.setPreferredSize( 
-                        new Dimension(userListArea.getWidth() - 20, item.getPreferredSize().height));
-            }
-            userListArea.revalidate();
-            userListArea.repaint(); 
-        }); 
-    }
-
-    /**
-     * Removes a user from the list
+     * Removes a user from the list.
      *
      * @param clientId The ID of the client to be removed.
      */
@@ -157,7 +154,7 @@ public class UserListPanel extends JPanel {
     }
 
     /**
-     * 
+     * Clears the user list.
      */
     protected void clearUserList() { // jah89 07-20-2024
         SwingUtilities.invokeLater(() -> { 
@@ -170,37 +167,12 @@ public class UserListPanel extends JPanel {
     }
 
     /**
-     * Updates the status of a user in the list.
+     * Get a UserListItem by clientId.
      *
      * @param clientId The ID of the client.
-     * @param isMuted  Whether the user is muted.
-     * @param isActive Whether the user is the last active user.
+     * @return The UserListItem if found, null otherwise.
      */
-    public void updateUserStatus(long clientId, boolean isMuted, boolean isActive) { // jah89 07-26-2024
-        SwingUtilities.invokeLater(() -> {
-            UserListItem userItem = getUserItem(clientId);
-            if (userItem != null) {
-                if (isMuted) {
-                    userItem.setMuted(true);
-                } else {
-                    userItem.setMuted(false);
-                }
-                if (isActive) {
-                    userItem.setActive(true);
-                } else {
-                    userItem.setActive(false);
-                }
-            }
-        });
-    }
-
-    /**
-     * Retrieves a user item from the list.
-     *
-     * @param clientId The ID of the client.
-     * @return The UserListItem for the given client ID.
-     */
-    protected UserListItem getUserItem(long clientId) { // jah89 07-26-2024
+    protected UserListItem getUserItem(long clientId) { // jah89 07-20-2024
         return userItemsMap.get(clientId);
     }
 }

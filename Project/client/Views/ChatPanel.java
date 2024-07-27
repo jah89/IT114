@@ -141,13 +141,13 @@ public class ChatPanel extends JPanel {
                                 } else {
                                     Client.INSTANCE.sendPrivateMessage(targetId, privateMessage);
                                     chatHistory.append("To " + targetName + ": " + privateMessage + "\n");
-                                    userListPanel.updateUserStatus(clientId, false, true); // jah89 07-26-2024
+                                    updateUserStatus(clientId, false, true); // jah89 07-26-2024
                                 }
                             }
                         } else {
                             Client.INSTANCE.sendMessage(text);
                             chatHistory.append("Me: " + text + "\n");
-                            userListPanel.updateUserStatus(clientId, false, true); // jah89 07-26-2024
+                            updateUserStatus(clientId, false, true); // jah89 07-26-2024
                         }
                         messageInput.setText(""); // Clear the original text
                     }
@@ -243,6 +243,18 @@ public class ChatPanel extends JPanel {
         });
     }
 
+    public void addUserListItem(long clientId, String clientName) { // jah89 07-26-2024
+        userListPanel.addUserListItem(clientId, clientName);
+    }
+
+    public void removeUserListItem(long clientId) { // jah89 07-26-2024
+        userListPanel.removeUserListItem(clientId);
+    }
+
+    public void clearUserList() { // jah89 07-26-2024
+        userListPanel.clearUserList();
+    }
+
     public void addText(String text) { // jah89 07-26-2024
         SwingUtilities.invokeLater(() -> {
             JEditorPane textContainer = new JEditorPane("text/plain", text);
@@ -281,18 +293,5 @@ public class ChatPanel extends JPanel {
                 vertical.setValue(vertical.getMaximum());
             });
         });
-    }
-
-    // Add methods to manage user list items
-    public void removeUserListItem(long clientId) { // jah89 07-26-2024
-        userListPanel.removeUserListItem(clientId);
-    }
-
-    public void clearUserList() { // jah89 07-26-2024
-        userListPanel.clearUserList();
-    }
-
-    public void addUserListItem(long clientId, String clientName) { // jah89 07-26-2024
-        userListPanel.addUserListItem(clientId, clientName);
     }
 }
