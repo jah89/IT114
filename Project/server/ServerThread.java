@@ -6,11 +6,17 @@ import Project.common.Payload;
 import Project.common.PayloadType;
 import Project.common.RollPayload;
 import Project.common.RoomResultsPayload;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.Socket;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 import java.util.function.Consumer;
 
 /**
@@ -40,7 +46,6 @@ public class ServerThread extends BaseServerThread {
         this.client = myClient;
         this.clientId = ServerThread.DEFAULT_CLIENT_ID;// this is updated later by the server
         this.onInitializationComplete = onInitializationComplete;
-
     }
 
     public void setClientName(String name) {
@@ -72,6 +77,7 @@ public class ServerThread extends BaseServerThread {
 
     @Override
     protected void onInitialized() {
+        loadMuteList(); // Load the mute list when the client initializes
         onInitializationComplete.accept(this); // Notify server that initialization is complete
     }
 
@@ -88,7 +94,6 @@ public class ServerThread extends BaseServerThread {
 
     @Override
     protected void disconnect() {
-        // sendDisconnect(clientId, clientName);
         super.disconnect();
     }
 
@@ -133,18 +138,18 @@ public class ServerThread extends BaseServerThread {
                 case UNMUTE: // jah89 07-20-2024
                     currentRoom.handleUnmute(clientId, payload.getMessage());
                     break;
-                    case PRIVATE_MESSAGE:  //jah89 07-20-2024
-                long targetId = payload.getClientId();
-                String privateMessage = payload.getMessage();
-                currentRoom.sendPrivateMessage(this, targetId, privateMessage);
-                break;
-            default:
-                break;
+                case PRIVATE_MESSAGE:  //jah89 07-20-2024
+                    long targetId = payload.getClientId();
+                    String privateMessage = payload.getMessage();
+                    currentRoom.sendPrivateMessage(this, targetId, privateMessage);
+                    break;
+                default:
+                    break;
+            }
+        } catch (Exception e) {
+            LoggerUtil.INSTANCE.severe("Could not process Payload: " + payload, e);
         }
-    } catch (Exception e) {
-        LoggerUtil.INSTANCE.severe("Could not process Payload: " + payload, e);
     }
-}
 
     // send methods to pass data back to the Client
 
@@ -244,11 +249,11 @@ public class ServerThread extends BaseServerThread {
     }
 
     // jah89 07-20-2024
-    private Set<Long> mutedClients = new HashSet<>();
+    private Map<Long, String> mutedClients = new HashMap<>();
 
     public void addMutedClient(long clientId) {
-        if (mutedClients.add(clientId)) { 
-            saveMuteList(clientName); 
+        if (mutedClients.putIfAbsent(clientId, currentRoom.getClient(clientId).getClientName()) == null) {
+            saveMuteList(); 
             ServerThread target = currentRoom.getClient(clientId);
             if (target != null) {
                 target.sendMessage(clientName + " muted you.");
@@ -257,10 +262,10 @@ public class ServerThread extends BaseServerThread {
             sendMuteStatusUpdate(clientId, true); // jah89 07-27-2024
         }
     }
-    
+
     public void removeMutedClient(long clientId) { 
-        if (mutedClients.remove(clientId)) { 
-            saveMuteList(clientName); 
+        if (mutedClients.remove(clientId) != null) {
+            saveMuteList(); 
             ServerThread target = currentRoom.getClient(clientId);
             if (target != null) {
                 target.sendMessage(clientName + " unmuted you.");
@@ -269,7 +274,7 @@ public class ServerThread extends BaseServerThread {
             sendMuteStatusUpdate(clientId, false); // jah89 07-27-2024
         }
     }
-    
+
     // Method to send mute status update to the client
     private void sendMuteStatusUpdate(long clientId, boolean isMuted) { // jah89 07-27-2024
         Payload p = new Payload();
@@ -278,16 +283,43 @@ public class ServerThread extends BaseServerThread {
         p.setPayloadType(PayloadType.MUTE_STATUS);
         send(p);
     }
-    
 
     public boolean isClientMuted(long clientId) {
-        return mutedClients.contains(clientId);
+        return mutedClients.containsKey(clientId);
     }
 
- 
+    // jah89 07-26-2024
+    private void saveMuteList() {
+        try {
+            File file = new File("mutelist_" + clientName + ".txt");
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+            for (Map.Entry<Long, String> entry : mutedClients.entrySet()) {
+                writer.write(entry.getKey() + ":" + entry.getValue());
+                writer.newLine();
+            }
+            writer.close();
+        } catch (IOException e) {
+            LoggerUtil.INSTANCE.severe("Error saving mute list for " + clientName, e);
+        }
+    }
 
-    //jah89 07-26-2024
-    private void saveMuteList(String clientName) {
-      
+    // Method to load the mute list from a file
+    private void loadMuteList() {
+        try {
+            File file = new File("mutelist_" + clientName + ".txt");
+            if (file.exists()) {
+                BufferedReader reader = new BufferedReader(new FileReader(file));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split(":");
+                    if (parts.length == 2) {
+                        mutedClients.put(Long.parseLong(parts[0]), parts[1]);
+                    }
+                }
+                reader.close();
+            }
+        } catch (IOException e) {
+            LoggerUtil.INSTANCE.severe("Error loading mute list for " + clientName, e);
+        }
     }
 }

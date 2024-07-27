@@ -213,15 +213,10 @@ public class ChatPanel extends JPanel {
         StringBuilder chatContent = new StringBuilder();
         chatContent.append(chatHistory.getText());  
 
-        // Generate unique filename using current date and time
         String fileName = String.format("chat_history_%s.txt", new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()));
-
-        // Write content to file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             writer.write(chatContent.toString());
         }
-
-        // Inform user about successful export
         chatHistory.append("Chat history exported to " + fileName + "\n");
     }
 
