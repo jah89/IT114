@@ -15,6 +15,8 @@ import javax.swing.border.EmptyBorder;
  */
 public class UserListItem extends JPanel {
     private JEditorPane textContainer;
+    private boolean isMuted = false; // jah89 07-20-2024
+    private boolean isActive = false; // jah89 07-20-2024
 
     /**
      * Constructor to create a UserListItem.
@@ -50,5 +52,23 @@ public class UserListItem extends JPanel {
 
     public String getClientName() {
         return textContainer.getText();
+    }
+
+    public void setMuted(boolean isMuted) { // jah89 07-20-2024
+        this.isMuted = isMuted;
+        updateColor();
+    }
+
+    public void setActive(boolean isActive) { // jah89 07-20-2024
+        this.isActive = isActive;
+        updateColor();
+    }
+
+    private void updateColor() { // jah89 07-20-2024
+        if (isMuted) {
+            textContainer.setForeground(Color.RED);
+        } else {
+            textContainer.setForeground(Color.BLACK);
+        }
     }
 }

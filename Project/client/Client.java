@@ -64,6 +64,7 @@ public enum Client {
     private final String LOGOFF = "logoff";
     private final String LOGOUT = "logout";
     private final String SINGLE_SPACE = " ";
+    private long clientId;
 
     // callback that updates the UI
     private static IClientEvents events;
@@ -83,6 +84,9 @@ public enum Client {
         // don't really help determine if the server had a problem
         // and is just for lesson's sake
         return server.isConnected() && !server.isClosed() && !server.isInputShutdown() && !server.isOutputShutdown();
+    }
+    public long getClientId() {
+        return clientId;
     }
 
     /**
@@ -495,8 +499,7 @@ public enum Client {
                     cp = (ConnectionPayload) payload;
                     processClientSync(cp.getClientId(), cp.getClientName());
                     break;
-                case DISCONNECT: // remove a disconnected client (mostly for the specific message vs leaving
-                    // a room)
+                case DISCONNECT: // remove a disconnected client (mostly for the specific message vs leaving a room)
                     cp = (ConnectionPayload) payload;
                     processDisconnect(cp.getClientId(), cp.getClientName());
                     // note: we want this to cascade
@@ -518,6 +521,9 @@ public enum Client {
                 case FLIP:
                     processFlipPayload(payload);
                     break;
+                case MUTE_STATUS: // handle mute status update // jah89 07-27-2024
+                    handleMuteStatus(payload);
+                    break;
                 default:
                     break;
             }
@@ -525,7 +531,13 @@ public enum Client {
             LoggerUtil.INSTANCE.severe("Could not process Payload: " + payload, e);
         }
     }
-
+    
+    // jah89 07-27-2024
+    private void handleMuteStatus(Payload payload) {
+        long clientId = payload.getClientId();
+        boolean isMuted = "MUTED".equals(payload.getMessage());
+        ClientUI.getInstance().updateUserStatus(clientId, isMuted, false); 
+    }
     /**
      * Processes a RollPayload object received from the server.
      * 

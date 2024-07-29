@@ -25,12 +25,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel; // jah89 07-20-2024
-import javax.swing.SwingUtilities; // jah89 07-20-2024
+import javax.swing.JPanel; 
+import javax.swing.SwingUtilities; 
 
 public class ClientUI extends JFrame implements IConnectionEvents, IMessageEvents, IRoomEvents, ICardControls {
-    private CardLayout card = new CardLayout(); // Layout manager to switch between different screens
-    private Container container; // Container to hold different panels
+    private static ClientUI instance; // Singleton instance
+
+    private CardLayout card = new CardLayout();
+    private Container container;
     private JPanel cardContainer;
     private String originalTitle;
     private JPanel currentCardPanel;
@@ -43,23 +45,22 @@ public class ClientUI extends JFrame implements IConnectionEvents, IMessageEvent
     private JLabel roomLabel = new JLabel();
 
     {
-        // Note: Moved from Client as this file is the entry point now
-        // statically initialize the client-side LoggerUtil
         LoggerUtil.LoggerConfig config = new LoggerUtil.LoggerConfig();
         config.setFileSizeLimit(2048 * 1024); // 2MB
         config.setFileCount(1);
         config.setLogLocation("client.log");
-        // Set the logger configuration
         LoggerUtil.INSTANCE.setConfig(config);
     }
 
-    /**
-     * Constructor to create the main application window.
-     * 
-     * @param title The title of the window.
-     */
-    public ClientUI(String title) {
-        super(title); // Call the parent's constructor to set the frame title
+    public static ClientUI getInstance() {
+        if (instance == null) {
+            instance = new ClientUI("JAH89-Client");
+        }
+        return instance;
+    }
+
+    private ClientUI(String title) {
+        super(title);
         originalTitle = title;
         container = getContentPane();
         cardContainer = new JPanel();
@@ -67,26 +68,24 @@ public class ClientUI extends JFrame implements IConnectionEvents, IMessageEvent
         container.add(roomLabel, BorderLayout.NORTH);
         container.add(cardContainer, BorderLayout.CENTER);
 
-        cardContainer.addComponentListener(new ComponentAdapter() { // jah89 07-20-2024
+        cardContainer.addComponentListener(new ComponentAdapter() {
             @Override
-            public void componentResized(ComponentEvent e) { // jah89 07-20-2024
-                cardContainer.setPreferredSize(e.getComponent().getSize()); // jah89 07-20-2024
-                cardContainer.revalidate(); // jah89 07-20-2024
-                cardContainer.repaint(); // jah89 07-20-2024
-            } // jah89 07-20-2024
+            public void componentResized(ComponentEvent e) {
+                cardContainer.setPreferredSize(e.getComponent().getSize());
+                cardContainer.revalidate();
+                cardContainer.repaint();
+            }
 
             @Override
-            public void componentMoved(ComponentEvent e) { // jah89 07-20-2024
-                // No specific action on move // jah89 07-20-2024
-            } // jah89 07-20-2024
-        }); // jah89 07-20-2024
+            public void componentMoved(ComponentEvent e) {
+            }
+        });
 
         setMinimumSize(new Dimension(400, 400));
-        setLocationRelativeTo(null); // Center the window
+        setLocationRelativeTo(null);
         menu = new Menu(this);
         this.setJMenuBar(menu);
 
-        // Initialize panels
         connectionPanel = new ConnectionPanel(this);
         userDetailsPanel = new UserDetailsPanel(this);
         chatPanel = new ChatPanel(this);
@@ -110,19 +109,15 @@ public class ClientUI extends JFrame implements IConnectionEvents, IMessageEvent
             }
         });
 
-        pack(); // Resize to fit components
-        setVisible(true); // Show the window
+        pack();
+        setVisible(true);
     }
 
-    /**
-     * Finds the current visible panel and updates the current card state.
-     */
     private void findAndSetCurrentPanel() {
         for (Component c : cardContainer.getComponents()) {
             if (c.isVisible()) {
                 currentCardPanel = (JPanel) c;
                 currentCard = Enum.valueOf(CardView.class, currentCardPanel.getName());
-                // Ensure connection for specific views
                 if (Client.INSTANCE.getMyClientId() == ClientData.DEFAULT_CLIENT_ID
                         && currentCard.ordinal() >= CardView.CHAT.ordinal()) {
                     show(CardView.CONNECT.name());
@@ -166,10 +161,8 @@ public class ClientUI extends JFrame implements IConnectionEvents, IMessageEvent
     }
 
     public static void main(String[] args) {
-        // TODO update with your UCID instead of mine
-        SwingUtilities.invokeLater(() -> new ClientUI("JAH89-Client"));
+        SwingUtilities.invokeLater(() -> getInstance());
     }
-    // Interface methods start
 
     @Override
     public void onClientDisconnect(long clientId, String clientName) {
@@ -231,9 +224,9 @@ public class ClientUI extends JFrame implements IConnectionEvents, IMessageEvent
         if (currentCard.ordinal() >= CardView.CHAT.ordinal()) {
             boolean isMe = clientId == Client.INSTANCE.getMyClientId();
             String message = String.format("*%s %s the Room %s*",
-                    /* 1st %s */ isMe ? "You" : String.format("%s[%s]", clientName, clientId),
-                    /* 2nd %s */ isJoin ? "joined" : "left",
-                    /* 3rd %s */ roomName == null ? "" : roomName); // added handling of null after the demo video
+                    isMe ? "You" : String.format("%s[%s]", clientName, clientId),
+                    isJoin ? "joined" : "left",
+                    roomName == null ? "" : roomName); 
             chatPanel.addText(message);
             if (isJoin) {
                 roomLabel.setText("Room: " + roomName);
@@ -241,9 +234,10 @@ public class ClientUI extends JFrame implements IConnectionEvents, IMessageEvent
             } else {
                 chatPanel.removeUserListItem(clientId);
             }
-
         }
     }
 
-    // Interface methods end
+    public void updateUserStatus(long clientId, boolean isMuted, boolean isActive) {
+        chatPanel.updateUserStatus(clientId, isMuted, isActive);
+    }
 }
