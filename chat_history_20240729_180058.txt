@@ -1,0 +1,32 @@
+Me: /createroom 4
+Me: /leaveroom
+Me: /leaveroom 4
+Me: /roomleave 4
+Me: /joinroom lobby
+Me: /createroom ted
+Me: .
+Me: .
+Me: .
+Me: .
+Me: .
+Me: .
+Me: .
+Me: .
+Me: ..
+Me: .
+Me: .
+Me: .
+Me: ..
+Me: .
+Me: /joinroom lobby
+Me: whats up
+Me: /joinroom Private
+Me: hey
+Me: /roll 2d6
+Me: /flip
+Me: /joinroom lobby
+Me: /flip
+Me: /mute Ryan
+Me: hey
+Me: /unmute Ryan
+Me: hey ryan i have something important save the chat history so you dont forgetr

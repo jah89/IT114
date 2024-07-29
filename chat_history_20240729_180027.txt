@@ -1,0 +1,14 @@
+Me: hey
+Me: /createRoom Jasons
+Me: /roomcreate jason
+Me: /roomcreate ttt
+Me: roomcreate 4
+Me: /joinroom lobby
+Me: hey
+Me: /createroom Private
+Me: hey guys
+Me: /joinroom lobby
+Me: /flip
+Me: /roll 2d6
+Me: hey
+Me: hey

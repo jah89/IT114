@@ -252,38 +252,45 @@ public class ServerThread extends BaseServerThread {
     private Map<Long, String> mutedClients = new HashMap<>();
 
     public void addMutedClient(long clientId) {
-        if (mutedClients.putIfAbsent(clientId, currentRoom.getClient(clientId).getClientName()) == null) {
-            saveMuteList(); 
+        if (!isClientMuted(clientId)) { // Only proceed if the client is not already muted
+            mutedClients.put(clientId, currentRoom.getClient(clientId).getClientName());
+            saveMuteList(); // Save the mute list after adding a client
             ServerThread target = currentRoom.getClient(clientId);
             if (target != null) {
                 target.sendMessage(clientName + " muted you.");
             }
-            // Send mute status update to the client
-            sendMuteStatusUpdate(clientId, true); // jah89 07-27-2024
+            sendMuteStatusUpdate(clientId, true); // Send mute status update to the client
+        } else {
+            // Send message indicating the client is already muted
+            sendMessage(this.clientId, "User " + currentRoom.getClient(clientId).getClientName() + " is already muted."); 
+            info("Client " + clientId + " is already muted."); // Log message indicating the client is already muted
         }
     }
-
-    public void removeMutedClient(long clientId) { 
-        if (mutedClients.remove(clientId) != null) {
-            saveMuteList(); 
+    
+    public void removeMutedClient(long clientId) {
+        if (isClientMuted(clientId)) { // Only proceed if the client is currently muted
+            mutedClients.remove(clientId);
+            saveMuteList(); // Save the mute list after removing a client
             ServerThread target = currentRoom.getClient(clientId);
             if (target != null) {
                 target.sendMessage(clientName + " unmuted you.");
             }
-            // Send mute status update to the client
-            sendMuteStatusUpdate(clientId, false); // jah89 07-27-2024
+            sendMuteStatusUpdate(clientId, false); // Send mute status update to the client
+        } else {
+            // Send message indicating the client is not muted
+            sendMessage(this.clientId, "User " + currentRoom.getClient(clientId).getClientName() + " is not muted."); 
+            info("Client " + clientId + " is not muted."); // Log message indicating the client is not muted
         }
     }
-
-    // Method to send mute status update to the client
-    private void sendMuteStatusUpdate(long clientId, boolean isMuted) { // jah89 07-27-2024
+    
+    private void sendMuteStatusUpdate(long clientId, boolean isMuted) { //jah89 07-20-2024
         Payload p = new Payload();
         p.setClientId(clientId);
         p.setMessage(isMuted ? "MUTED" : "UNMUTED");
         p.setPayloadType(PayloadType.MUTE_STATUS);
         send(p);
     }
-
+    
     public boolean isClientMuted(long clientId) {
         return mutedClients.containsKey(clientId);
     }
@@ -303,8 +310,7 @@ public class ServerThread extends BaseServerThread {
         }
     }
 
-    // Method to load the mute list from a file
-    private void loadMuteList() {
+    private void loadMuteList() {  //jah89 07-27-2014
         try {
             File file = new File("mutelist_" + clientName + ".txt");
             if (file.exists()) {

@@ -532,11 +532,11 @@ public enum Client {
         }
     }
     
-    // Method to handle mute status update // jah89 07-27-2024
+    // jah89 07-27-2024
     private void handleMuteStatus(Payload payload) {
         long clientId = payload.getClientId();
         boolean isMuted = "MUTED".equals(payload.getMessage());
-        ClientUI.getInstance().updateUserStatus(clientId, isMuted, false); // Use the singleton instance here
+        ClientUI.getInstance().updateUserStatus(clientId, isMuted, false); 
     }
     /**
      * Processes a RollPayload object received from the server.

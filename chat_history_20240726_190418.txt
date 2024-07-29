@@ -1,2 +1,0 @@
-Me: hey
-Chat history exported to chat_history_20240726_190414.txt
